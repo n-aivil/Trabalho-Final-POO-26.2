@@ -57,4 +57,29 @@ public abstract class Usuarios{
 	public String getSenha(){
 		return this.senha;
 	}
+
+	public void cadastroDeUsuario(){
+		// quer cadastrar voluntário ou veterinario?
+		// if voluntario
+		cadastrarVoluntario(nome, idade, genero, cpf, email, senha);
+		// if veterinario
+		cadastrarVeterinario(nome, idade, genero, cpf, email, senha, crmv);
+		// if adotante
+		cadastrarAdotante()
+	}
+
+	public static Voluntarios cadastrarVoluntario(String nome, int idade, String genero, String cpf, String email, String senha){
+		Voluntarios novoVoluntario = new Voluntarios(nome, idade, genero, cpf, email, senha);
+		return novoVoluntario;
+	}
+
+	public static Veterinario cadastrarVeterinario(String nome, int idade, String genero, String cpf, String email, String senha, String crmv){
+		Veterinario novoVeterinario = new Veterinario(nome, idade, genero, cpf, email, senha, crmv);
+		return novoVeterinario;
+	}
+
+	public static Adotantes cadastrarAdotantes(String nome, int idade, String genero, String cpf, String email, String senha){
+		Adotantes novoAdotante = new Adotantes(nome, idade, genero, cpf, email, senha);
+		return novoAdotante;
+	}
 }
