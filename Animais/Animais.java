@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+
 public class Animais{
+
+    private static ArrayList<Animais> todosAnimais = new ArrayList<>();
     private String nome;
     private String especie;
     private String raca;
@@ -8,15 +12,16 @@ public class Animais{
     private String dataResgate;
     private String statusAdocao;
 
-    public Animais(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, Sring statusAdocao){
+    public Animais(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao){
         if(nome == null || nome.isEmpty()){System.out.println("Erro");}else{setNome(nome);}
         if(especie == null || especie.isEmpty()){System.out.println("Erro");}else{setEspecie(especie);}
         if(raca == null || raca.isEmpty()){System.out.println("Erro");}else{setRaca(raca);}
         if(idade<0){System.out.println("Erro");}else{setIdade(idade);}
-        if(porte == null|| porte.isEmpty()){System.out.println("Erro")}else{setPorte(porte);}
-        if(estadoSaude == null || estadoSaude.isEmpty()){System.out.println("Erro")}else{setEstadoSaude(estadoSaude);}
-        if(dataResgate == null || dataResgate.isEmpty()){System.out.println("Erro")}else{setDataResgate(dataResgate);}
-        if(statusAdocao == null || statusAdocao.isEmpty()){System.out.println("Erro")}else{setStatusAdocao(statusAdocao);}
+        if(porte == null|| porte.isEmpty()){System.out.println("Erro");}else{setPorte(porte);}
+        if(estadoSaude == null || estadoSaude.isEmpty()){System.out.println("Erro");}else{setEstadoSaude(estadoSaude);}
+        if(dataResgate == null || dataResgate.isEmpty()){System.out.println("Erro");}else{setDataResgate(dataResgate);}
+        if(statusAdocao == null || statusAdocao.isEmpty()){System.out.println("Erro");}else{setStatusAdocao(statusAdocao);}
+        todosAnimais.add(this);//ter atenção nessa linha, para ver como ela vai lidar com o armazenamento de todas essas informações.
     }
 
     public void setNome(String nome){
