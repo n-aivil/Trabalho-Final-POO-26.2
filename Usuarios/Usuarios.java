@@ -7,7 +7,7 @@ public abstract class Usuarios{
 	private String senha;
 
 	public Usuarios(String nome, int idade, String genero, String cpf, String email, String senha){
-		// as mensagens tão só como erro pra gente saber que faz alguma coisa depois. coloca como exceção??
+		// as mensagens tão só como erro pra gente saber que faz alguma coisa depois. coloca como exceção?? sim, lançar as exceções.
 		if(nome == null || nome.isEmpty()){System.out.println("Erro");}else {setNome(nome);}
 		if(idade <= 18 || idade >= 100){System.out.println("Erro");}else{setIdade(idade);}
 		if(genero == null || genero.isEmpty()){System.out.println("Erro");}else{setGenero(genero);}
@@ -65,7 +65,7 @@ public abstract class Usuarios{
 		// if veterinario
 		cadastrarVeterinario(nome, idade, genero, cpf, email, senha, crmv);
 		// if adotante
-		cadastrarAdotante()
+		cadastrarAdotantes();
 	}
 
 	public static Voluntarios cadastrarVoluntario(String nome, int idade, String genero, String cpf, String email, String senha){
