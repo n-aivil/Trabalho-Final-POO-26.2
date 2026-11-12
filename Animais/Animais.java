@@ -13,47 +13,79 @@ public class Animais{
     private String statusAdocao;
 
     public Animais(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao){
-        if(nome == null || nome.isEmpty()){System.out.println("Erro");}else{setNome(nome);}
-        if(especie == null || especie.isEmpty()){System.out.println("Erro");}else{setEspecie(especie);}
-        if(raca == null || raca.isEmpty()){System.out.println("Erro");}else{setRaca(raca);}
-        if(idade<0){System.out.println("Erro");}else{setIdade(idade);}
-        if(porte == null|| porte.isEmpty()){System.out.println("Erro");}else{setPorte(porte);}
-        if(estadoSaude == null || estadoSaude.isEmpty()){System.out.println("Erro");}else{setEstadoSaude(estadoSaude);}
-        if(dataResgate == null || dataResgate.isEmpty()){System.out.println("Erro");}else{setDataResgate(dataResgate);}
-        if(statusAdocao == null || statusAdocao.isEmpty()){System.out.println("Erro");}else{setStatusAdocao(statusAdocao);}
+        setNome(nome);
+        setEspecie(especie);
+        setRaca(raca);
+        setIdade(idade);
+        setPorte(porte);
+        setEstadoSaude(estadoSaude);
+        setDataResgate(dataResgate);
+        {System.out.println("Erro");}else{setStatusAdocao(statusAdocao);}
         todosAnimais.add(this);//ter atenção nessa linha, para ver como ela vai lidar com o armazenamento de todas essas informações.
     }
 
-    public void setNome(String nome){
-        this.nome = nome;
+    public void setNome(String nome) throws NomeInvalidoException{
+        if(nome == null || nome.isEmpty()){
+            throw new NomeInvalidoException("Erro: Campo vazio.");
+        }else{
+            this.nome = nome;
+        }
     }
 
-    public void setEspecie(String especie){
-        this.especie = especie;
+    public void setEspecie (String especie) throws EspecieInvalidaException{
+        if(especie == null || especie.isEmpty()){
+            throw new EspecieInvalidaException("Erro: Campo vazio.");
+        }else{
+         this.especie = especie;
+        }
     }
 
-    public void setRaca(String raca){
-        this.raca = raca;
+    public void setRaca(String raca) throws RacaInvalidaException{
+        if(raca == null || raca.isEmpty()){
+            throw new RacaInvalidaException("Erro: Campo Vazio.");
+        }else{
+            this.raca = raca;
+        }
     }
 
-    public void setIdade(int idade){
-        this.idade = idade;
+    public void setIdade(int idade) throws IdadeInvalidaException{
+        if(idade<0){
+            throw new IdadeInvalidaException("Idade invalida.");
+        }else{
+            this.idade = idade;
+        }
     }
 
-    public void setPorte(String porte){
-        this.porte = porte;
+    public void setPorte(String porte) throws PorteInvalidoException{
+        if(porte == null|| porte.isEmpty()){
+            throw new PorteInvalidoException("Erro: Campo vazio.")
+        }else{
+            this.porte = porte;
+        }
     }
 
-    public void setEstadoSaude(String estadoSaude){
-        this.estadoSaude = estadoSaude;
+    public void setEstadoSaude(String estadoSaude) throws EstadoSaudeInvalidoException{
+        if(estadoSaude == null || estadoSaude.isEmpty()){
+            throw new EstadoSaudeInvalidoException("Erro: Campo vazio.");
+        }else{
+            this.estadoSaude = estadoSaude;
+        }
     }
 
-    public void setDataResgate(String dataResgate){
-        this.dataResgate = dataResgate;
+    public void setDataResgate(String dataResgate) throws DataResgateInvalidaException{
+        if(dataResgate == null || dataResgate.isEmpty()){
+            throw new DataResgateInvalidaException("Erro: Campo vazio.");
+        }else{
+            this.dataResgate = dataResgate;
+        }
     }
 
-    public void setStatusAdocao(String statusAdocao){
-        this.statusAdocao = statusAdocao;
+    public void setStatusAdocao(String statusAdocao) throws StatusAdocaoInvalidoException{
+        if(statusAdocao == null || statusAdocao.isEmpty()){
+            throw new StatusAdocaoInvalidoException("Erro: Campo vazio.")
+        }else{
+            this.statusAdocao = statusAdocao;
+        }
     }
 
     public String getNome(){

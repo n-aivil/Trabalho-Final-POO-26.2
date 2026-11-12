@@ -41,7 +41,14 @@ public abstract class Usuarios{
 	}
 
 	public void setCpf(String cpf) throws CpfInvalidoException{
-	    if(cpf == null || cpf.isEmpty() || cpf.length() != 11){throw new CpfInvalidoException("Cpf inválido.");}else{this.cpf = cpf;}
+	    if(cpf == null || cpf.isEmpty()){
+			throw new CpfInvalidoException("Erro: Campo vazio");
+			}
+		else if(cpf.length() != 11){
+		    throw new CpfInvalidoException("Seu CPF precisa ter 11 digitos.");
+		}else{
+		this.cpf = cpf;
+		}
 	}
 	public String getCpf(){
 		return this.cpf;
@@ -50,14 +57,28 @@ public abstract class Usuarios{
 	public void setEmail(String email) throws EmailInvalidoException{
 	    String regex = "^[\\w._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 		Boolean isValid = Pattern.matches(regex, email);
-		if(email == null || email.isEmpty() ||!isValid){throw new EmailInvalidoException("Email invalido.");}else{this.email = email;}
+		if(email == null || email.isEmpty()){
+		    throw new EmailInvalidoException("Erro: Campo vazio.");
+		}
+		else if(!isValid){
+		throw new EmailInvalidoException("Email invalido.");
+		}else{
+		this.email = email;
+		}
 	}
 	public String getEmail(){
 		return this.email;
 	}
 
 	public void setSenha(String senha) throws SenhaInvalidaException{
-	    if(senha == null || senha.length() < 6 || senha.length() > 6){throw new SenhaInvalidaException("A senha deve conter 6 caracteres.");}else{this.senha = senha;}
+	    if(senha == null){
+			throw new SenhaInvalidaException("Erro: Campo vazio.");
+			}
+		else if(senha.length() < 6 || senha.length() > 6){
+		    throw new SenhaInvalidaException("A senha deve conter 6 caracteres.");
+		}else{
+		this.senha = senha;
+		}
 	}
 	public String getSenha(){
 		return this.senha;
