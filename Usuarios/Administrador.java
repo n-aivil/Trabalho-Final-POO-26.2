@@ -1,7 +1,7 @@
 public class Administrador extends Usuarios{
 	// o administrador tem um email e senha padrões, mas precisa cadastrar as outras informações
 
-	public Administrador(String nome, int idade, String genero, String cpf, String email, String senha){
+	public Administrador(String nome, int idade, String genero, String cpf, String email, String senha) throws NomeInvalidoException, IdadeInvalidaException, GeneroInvalidoException, CpfInvalidoException, EmailInvalidoException, SenhaInvalidaException{
 		super(nome, idade, genero, cpf, email, senha);
 	}
 
