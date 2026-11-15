@@ -10,6 +10,8 @@ public class Administrador extends Usuarios{
 
 	public Animais cadastrarAnimaisRegastados(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao){
 		Animais novoAnimal = new Animais(nome, especie, raca, idade, porte, estadoSaude, dataResgate, statusAdocao);
+		todosAnimais.add(novoAnimal);
+		System.out.println("Animal cadastrado com sucesso! Id gerado: " + novoAnimal.getId() + "\n");
 		return novoAnimal;
 	}
 
@@ -26,12 +28,13 @@ public class Administrador extends Usuarios{
 				a.setStatusAdocao(novoStatusAdocao);
 			}
 		}
+		System.out.println("Animal com o ID " + id + " não foi encontrado.\n");
 	}
 
 	public void removerAnimal(int id){
 	    for(Animais a : todosAnimais){
 			if(a.getId() == id){
-			    if(a.getStatusAdocao().equals("Adotado"){
+			    if(a.getStatusAdocao().equals("Adotado")){
 					System.out.println("Esse animal já foi adotado, não é possível removê-lo.\n");
 				}else{
 				    animaisRemovidos.add(a);
@@ -44,12 +47,12 @@ public class Administrador extends Usuarios{
 		System.out.println("Animal com o ID " + id + " não foi encontrado.\n");
 	}
 
-	public void exibirAnimaisRemovidos(int id){
-
+	public void exibirAnimaisRemovidos(){
+		System.out.println(animaisRemovidos);
 	}
 
-	public void exibirTodosAnimais(int id){
-
+	public void exibirTodosAnimais(){
+        System.out.println(todosAnimais);
 	}
 
 }
