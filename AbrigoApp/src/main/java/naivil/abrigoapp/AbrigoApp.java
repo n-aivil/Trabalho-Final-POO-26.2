@@ -4,6 +4,7 @@
 
 package naivil.abrigoapp;
 
+import naivil.abrigoapp.pagsInicial.PagInicial;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import javax.swing.UIManager;

@@ -4,7 +4,7 @@
  */
 package naivil.abrigoapp.pagsCadastro;
 
-import naivil.abrigoapp.PagInicialCadastro;
+import naivil.abrigoapp.pagsInicial.PagInicialCadastro;
 
 /**
  *
