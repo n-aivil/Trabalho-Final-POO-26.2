@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Animais{
 
     private static ArrayList<Animais> todosAnimais = new ArrayList<>();
+    private static int contadorId = 1;
     private String nome;
     private String especie;
     private String raca;
@@ -11,6 +12,7 @@ public class Animais{
     private String estadoSaude;
     private String dataResgate;
     private String statusAdocao;
+    private int id;
 
     public Animais(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao){
         setNome(nome);
@@ -20,9 +22,9 @@ public class Animais{
         setPorte(porte);
         setEstadoSaude(estadoSaude);
         setDataResgate(dataResgate);
-        {System.out.println("Erro");}else{setStatusAdocao(statusAdocao);}
-        todosAnimais.add(this);//ter atenção nessa linha, para ver como ela vai lidar com o armazenamento de todas essas informações.
-    }
+        setStatusAdocao(statusAdocao);
+        this.id = contadorId++;
+        todosAnimais.add(this);
 
     public void setNome(String nome) throws NomeInvalidoException{
         if(nome == null || nome.isEmpty()){
@@ -58,7 +60,7 @@ public class Animais{
 
     public void setPorte(String porte) throws PorteInvalidoException{
         if(porte == null|| porte.isEmpty()){
-            throw new PorteInvalidoException("Erro: Campo vazio.")
+            throw new PorteInvalidoException("Erro: Campo vazio.");
         }else{
             this.porte = porte;
         }
@@ -82,7 +84,7 @@ public class Animais{
 
     public void setStatusAdocao(String statusAdocao) throws StatusAdocaoInvalidoException{
         if(statusAdocao == null || statusAdocao.isEmpty()){
-            throw new StatusAdocaoInvalidoException("Erro: Campo vazio.")
+            throw new StatusAdocaoInvalidoException("Erro: Campo vazio.");
         }else{
             this.statusAdocao = statusAdocao;
         }
@@ -118,5 +120,9 @@ public class Animais{
 
     public String getStatusAdocao(){
         return statusAdocao;
+    }
+
+    public int getId(){
+        return id;
     }
 }

@@ -1,7 +1,9 @@
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.ArrayList;
 
 public abstract class Usuarios{
+    private static ArrayList<Usuarios> todosUsuarios = new ArrayList<>();
 	private String nome;
 	private int idade;
 	private String genero;
@@ -17,6 +19,7 @@ public abstract class Usuarios{
 		setCpf(cpf);
 		setEmail(email);
 		setSenha(senha);
+		todosUsuarios.add(this);
 	}
 
 	public void setNome(String nome) throws NomeInvalidoException{
@@ -84,16 +87,6 @@ public abstract class Usuarios{
 		return this.senha;
 	}
 
-	public void cadastroDeUsuario(){
-		// quer cadastrar voluntário ou veterinario?
-		// if voluntario
-		cadastrarVoluntario(nome, idade, genero, cpf, email, senha);
-		// if veterinario
-		cadastrarVeterinario(nome, idade, genero, cpf, email, senha, crmv);
-		// if adotante
-		cadastrarAdotantes();
-	}
-
 	public static Voluntarios cadastrarVoluntario(String nome, int idade, String genero, String cpf, String email, String senha){
 		Voluntarios novoVoluntario = new Voluntarios(nome, idade, genero, cpf, email, senha);
 		return novoVoluntario;
@@ -107,5 +100,14 @@ public abstract class Usuarios{
 	public static Adotantes cadastrarAdotantes(String nome, int idade, String genero, String cpf, String email, String senha){
 		Adotantes novoAdotante = new Adotantes(nome, idade, genero, cpf, email, senha);
 		return novoAdotante;
+	}
+
+	public static Usuarios autenticar(String emailDigitado, String senhaDigitada){
+	    for(Usuarios u : todosUsuarios){
+			if(u.getEmail().equals(emailDigitado) && u.getSenha().equals(senhaDigitada)){
+			    return u;
+			}
+		}
+		return null;
 	}
 }
