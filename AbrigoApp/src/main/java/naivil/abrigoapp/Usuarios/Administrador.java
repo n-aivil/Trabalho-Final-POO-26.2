@@ -1,3 +1,5 @@
+package naivil.abrigoapp.Usuarios;
+
 public class Administrador extends Usuarios{
     private List<Animais> animaisRemovidos = new ArrayList<>();
 	// o administrador tem um email e senha padrões, mas precisa cadastrar as outras informações

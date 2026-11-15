@@ -1,3 +1,5 @@
+package naivil.abrigoapp.Funcoes;
+
 import java.time.LocalTime;
 
 public class Notificacao{

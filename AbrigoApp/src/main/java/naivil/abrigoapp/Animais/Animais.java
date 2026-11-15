@@ -1,3 +1,5 @@
+package naivil.abrigoapp.Animais;
+
 import java.util.ArrayList;
 
 public class Animais{
