@@ -1,7 +1,7 @@
 package naivil.abrigoapp.Exception;
 
-public class StatusAdocaoInvalido extends Exception{
-    public StatusAdocaoInvalido(String mensagem){
+public class StatusAdocaoInvalidoException extends Exception{
+    public StatusAdocaoInvalidoException(String mensagem){
         super(mensagem);
     }
 }

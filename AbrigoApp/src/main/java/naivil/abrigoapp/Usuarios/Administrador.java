@@ -1,5 +1,9 @@
 package naivil.abrigoapp.Usuarios;
 
+import java.util.ArrayList;
+import java.util.List;
+import naivil.abrigoapp.Animais.Animais;
+
 public class Administrador extends Usuarios{
     private List<Animais> animaisRemovidos = new ArrayList<>();
 	// o administrador tem um email e senha padrões, mas precisa cadastrar as outras informações
@@ -31,7 +35,7 @@ public class Administrador extends Usuarios{
 	public void removerAnimal(int id){
 	    for(Animais a : todosAnimais){
 			if(a.getId() == id){
-			    if(a.getStatusAdocao().equals("Adotado"){
+			    if(a.getStatusAdocao().equals("Adotado")){
 					System.out.println("Esse animal já foi adotado, não é possível removê-lo.\n");
 				}else{
 				    animaisRemovidos.add(a);

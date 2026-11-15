@@ -1,6 +1,7 @@
 package naivil.abrigoapp.Animais;
 
 import java.util.ArrayList;
+import naivil.abrigoapp.Exception.*;
 
 public class Animais{
 
@@ -27,6 +28,7 @@ public class Animais{
         setStatusAdocao(statusAdocao);
         this.id = contadorId++;
         todosAnimais.add(this);
+    }
 
     public void setNome(String nome) throws NomeInvalidoException{
         if(nome == null || nome.isEmpty()){
