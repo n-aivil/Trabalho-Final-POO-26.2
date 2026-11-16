@@ -1,5 +1,5 @@
 package naivil.abrigoapp.Usuarios;
-
+import naivil.abrigoapp.Exception.*;
 public class Veterinario extends Usuarios{
 	private String crmv;
 

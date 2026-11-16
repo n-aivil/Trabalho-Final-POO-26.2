@@ -1,8 +1,8 @@
 package naivil.abrigoapp.Usuarios;
 
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.util.ArrayList;
+import naivil.abrigoapp.Exception.*;
 
 public abstract class Usuarios{
     private static ArrayList<Usuarios> todosUsuarios = new ArrayList<>();

@@ -1,10 +1,12 @@
 package naivil.abrigoapp.Animais;
 
 import java.util.ArrayList;
+import java.util.List;
+import naivil.abrigoapp.Exception.*;
 
 public class Animais{
 
-    private static ArrayList<Animais> todosAnimais = new ArrayList<>();
+    protected static ArrayList<Animais> todosAnimais = new ArrayList<>();
     private static int contadorId = 1;
     private String nome;
     private String especie;
@@ -14,9 +16,10 @@ public class Animais{
     private String estadoSaude;
     private String dataResgate;
     private String statusAdocao;
-    private int id;
+    private final int id;
+    private static List<Animais> animaisRemovidos = new ArrayList<>();
 
-    public Animais(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao){
+    public Animais(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao) {
         setNome(nome);
         setEspecie(especie);
         setRaca(raca);
@@ -27,8 +30,16 @@ public class Animais{
         setStatusAdocao(statusAdocao);
         this.id = contadorId++;
         todosAnimais.add(this);
+    }
+        public List<Animais> getTodosAnimais() {
+            return todosAnimais;
+        }
 
-    public void setNome(String nome) throws NomeInvalidoException{
+        public List<Animais> getAnimaisRemovidos() {
+            return animaisRemovidos;
+        }
+        
+    public void setNome(String nome){
         if(nome == null || nome.isEmpty()){
             throw new NomeInvalidoException("Erro: Campo vazio.");
         }else{
@@ -36,7 +47,7 @@ public class Animais{
         }
     }
 
-    public void setEspecie (String especie) throws EspecieInvalidaException{
+    public void setEspecie (String especie){
         if(especie == null || especie.isEmpty()){
             throw new EspecieInvalidaException("Erro: Campo vazio.");
         }else{
@@ -44,7 +55,7 @@ public class Animais{
         }
     }
 
-    public void setRaca(String raca) throws RacaInvalidaException{
+    public void setRaca(String raca){
         if(raca == null || raca.isEmpty()){
             throw new RacaInvalidaException("Erro: Campo Vazio.");
         }else{
@@ -52,7 +63,7 @@ public class Animais{
         }
     }
 
-    public void setIdade(int idade) throws IdadeInvalidaException{
+    public void setIdade(int idade){
         if(idade<0){
             throw new IdadeInvalidaException("Idade invalida.");
         }else{
@@ -60,7 +71,7 @@ public class Animais{
         }
     }
 
-    public void setPorte(String porte) throws PorteInvalidoException{
+    public void setPorte(String porte){
         if(porte == null|| porte.isEmpty()){
             throw new PorteInvalidoException("Erro: Campo vazio.");
         }else{
@@ -68,7 +79,7 @@ public class Animais{
         }
     }
 
-    public void setEstadoSaude(String estadoSaude) throws EstadoSaudeInvalidoException{
+    public void setEstadoSaude(String estadoSaude){
         if(estadoSaude == null || estadoSaude.isEmpty()){
             throw new EstadoSaudeInvalidoException("Erro: Campo vazio.");
         }else{
@@ -76,7 +87,7 @@ public class Animais{
         }
     }
 
-    public void setDataResgate(String dataResgate) throws DataResgateInvalidaException{
+    public void setDataResgate(String dataResgate){
         if(dataResgate == null || dataResgate.isEmpty()){
             throw new DataResgateInvalidaException("Erro: Campo vazio.");
         }else{
@@ -84,7 +95,7 @@ public class Animais{
         }
     }
 
-    public void setStatusAdocao(String statusAdocao) throws StatusAdocaoInvalidoException{
+    public void setStatusAdocao(String statusAdocao){
         if(statusAdocao == null || statusAdocao.isEmpty()){
             throw new StatusAdocaoInvalidoException("Erro: Campo vazio.");
         }else{
@@ -128,3 +139,4 @@ public class Animais{
         return id;
     }
 }
+

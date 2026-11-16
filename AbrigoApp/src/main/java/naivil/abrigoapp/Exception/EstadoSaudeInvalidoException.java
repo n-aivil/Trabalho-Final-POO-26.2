@@ -1,7 +1,7 @@
 package naivil.abrigoapp.Exception;
 
-public class EstadoSaudeInvalido extends Exception{
-    public EstadoSaudeInvalido(String mensagem){
+public class EstadoSaudeInvalidoException extends RuntimeException{
+    public EstadoSaudeInvalidoException(String mensagem){
         super(mensagem);
     }
 }

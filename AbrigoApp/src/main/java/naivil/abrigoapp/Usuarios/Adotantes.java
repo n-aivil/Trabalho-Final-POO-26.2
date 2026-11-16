@@ -1,6 +1,12 @@
 package naivil.abrigoapp.Usuarios;
+import java.util.List;
+import naivil.abrigoapp.Animais.Animais;
+import naivil.abrigoapp.Exception.*;
 
 public class Adotantes extends Usuarios{
+
+    private Iterable<Animais> todosAnimais;
+    private List<Animais> animaisSolicitados = new ArrayList<>();
 	public Adotantes(String nome, int idade, String genero, String cpf, String email, String senha) throws NomeInvalidoException, IdadeInvalidaException, GeneroInvalidoException, CpfInvalidoException, EmailInvalidoException, SenhaInvalidaException{
 		super(nome, idade, genero, cpf, email, senha);
 	}
@@ -8,7 +14,7 @@ public class Adotantes extends Usuarios{
 	public void visualizarAnimaisDisponiveis(){
 	}
 
-	public void solicitarAdocao(int id) throws AnimalIndisponivelException{
+	public void solicitarAdocao(int id){
 	    boolean encontrado = false;
 
 	    for(Animais a : todosAnimais){
@@ -19,6 +25,7 @@ public class Adotantes extends Usuarios{
     			    throw new AnimalIndisponivelException("Erro: Animal já adotado.\n");
     			}else{
     			    //logica de solicitação
+                                animaisSolicitados.add(a);
     				System.out.println("Solicitação de adoção registrada para o animal: " + a.getNome());
     				return;
     			}
@@ -28,6 +35,10 @@ public class Adotantes extends Usuarios{
 		    throw new AnimalIndisponivelException("Erro: Animal não existente.\n");
 		}
 	}
+        
+        public List<Animais> getAnimaisSolicitados() {
+            return animaisSolicitados;
+        }
 
 	public void consultarStatusAdocao(){
 
