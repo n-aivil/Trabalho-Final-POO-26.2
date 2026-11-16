@@ -237,7 +237,7 @@ public class pagCadastrarAnimal extends javax.swing.JFrame {
             return;
         }
         
-        int idade;
+        int idade = 0;
         try {
             idade = Integer.parseInt(fieldIdade.getText().trim());
             if(idade < 0) {throw new NumberFormatException();}
@@ -245,7 +245,7 @@ public class pagCadastrarAnimal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Insira uma idade válida.");
         }
         
-        java.time.LocalDate data;
+        java.time.LocalDate data = null;
         try{
             java.time.format.DateTimeFormatter fmt = java.time.format.DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(java.time.format.ResolverStyle.STRICT);
             data = java.time.LocalDate.parse(fieldData.getText().trim(), fmt);

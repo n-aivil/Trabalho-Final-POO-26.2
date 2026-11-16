@@ -31,7 +31,7 @@ public class Animais{
         this.id = contadorId++;
         todosAnimais.add(this);
     }
-        public List<Animais> getTodosAnimais() {
+        public static List<Animais> getTodosAnimais() {
             return todosAnimais;
         }
         
