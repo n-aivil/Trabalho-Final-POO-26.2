@@ -78,11 +78,7 @@ public class pagNotificacoes extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Notificações");
 
-        listaNotificacoes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listaNotificacoes.setModel(new DefaultListModel<Notificacao>());
         jScrollPane1.setViewportView(listaNotificacoes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -173,7 +169,7 @@ public class pagNotificacoes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelTitulo;
-    private javax.swing.JList<String> listaNotificacoes;
+    private javax.swing.JList<Notificacao> listaNotificacoes;
     // End of variables declaration//GEN-END:variables
 
     private void iniciarAtualizacao() {

@@ -4,6 +4,11 @@
  */
 package naivil.abrigoapp.pagsNavegacao;
 
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import naivil.abrigoapp.Funcoes.Atividade;
 import naivil.abrigoapp.pagsUsuario.pagAdmin;
 
 /**
@@ -17,8 +22,12 @@ public class pagAtividades extends javax.swing.JFrame {
     /**
      * Creates new form pagAtividades
      */
+    
+    private final DefaultListModel<Atividade> modelo = new DefaultListModel<>();
     public pagAtividades() {
         initComponents();
+        listaAtividades.setModel(modelo);
+        configurarRenderer();
     }
 
     /**
@@ -31,46 +40,76 @@ public class pagAtividades extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        buttonVoltar1 = new javax.swing.JButton();
+        buttonCriarAtividade = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
+        listaAtividades = new javax.swing.JList<>();
+        buttonVoltar2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        buttonVoltar1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        buttonVoltar1.setText("Voltar");
-        buttonVoltar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonVoltar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonCriarAtividade.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonCriarAtividade.setText("Criar nova atividade");
+        buttonCriarAtividade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonCriarAtividade.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonVoltar1MouseClicked(evt);
+                buttonCriarAtividadeMouseClicked(evt);
             }
         });
-        buttonVoltar1.addActionListener(this::buttonVoltar1ActionPerformed);
+        buttonCriarAtividade.addActionListener(this::buttonCriarAtividadeActionPerformed);
 
         labelTitulo.setFont(new java.awt.Font("sansserif", 1, 48)); // NOI18N
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Atividades");
+
+        listaAtividades.setModel(new DefaultListModel<Atividade>());
+
+        buttonVoltar2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonVoltar2.setText("Voltar");
+        buttonVoltar2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonVoltar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonVoltar2MouseClicked(evt);
+            }
+        });
+        buttonVoltar2.addActionListener(this::buttonVoltar2ActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(buttonVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(875, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(listaAtividades, javax.swing.GroupLayout.PREFERRED_SIZE, 954, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonCriarAtividade, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(buttonVoltar2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(865, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(labelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 623, Short.MAX_VALUE)
-                .addComponent(buttonVoltar1)
-                .addGap(30, 30, 30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(buttonCriarAtividade)
+                .addGap(18, 18, 18)
+                .addComponent(listaAtividades, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(744, Short.MAX_VALUE)
+                    .addComponent(buttonVoltar2)
+                    .addGap(20, 20, 20)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -87,17 +126,28 @@ public class pagAtividades extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonVoltar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltar1MouseClicked
+    private void buttonCriarAtividadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCriarAtividadeMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonVoltar1MouseClicked
+    }//GEN-LAST:event_buttonCriarAtividadeMouseClicked
 
-    private void buttonVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltar1ActionPerformed
-        // voltar pra pag de cadastro
+    private void buttonCriarAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCriarAtividadeActionPerformed
+
+        this.dispose();
+        java.awt.EventQueue.invokeLater(() -> {
+            new pagCriarAtividade().setVisible(true);
+        });
+    }//GEN-LAST:event_buttonCriarAtividadeActionPerformed
+
+    private void buttonVoltar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltar2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonVoltar2MouseClicked
+
+    private void buttonVoltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltar2ActionPerformed
         this.dispose();
         java.awt.EventQueue.invokeLater(() -> {
             new pagAdmin().setVisible(true);
         });
-    }//GEN-LAST:event_buttonVoltar1ActionPerformed
+    }//GEN-LAST:event_buttonVoltar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,8 +175,25 @@ public class pagAtividades extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonVoltar1;
+    private javax.swing.JButton buttonCriarAtividade;
+    private javax.swing.JButton buttonVoltar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JList<Atividade> listaAtividades;
     // End of variables declaration//GEN-END:variables
+
+    private void configurarRenderer() {
+        listaAtividades.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel l = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                Atividade a = (Atividade) value;
+                String prazo = a.getPrazo().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                String titulo = a.isConcluida() ? "<s>" + a.getTitulo() + "</s>" : "<b>" + a.getTitulo() + "</b>";
+                l.setText("<html>" + titulo + " <small>(até " + prazo + ")</small><br>" + a.getDescricao() + "</html>");
+                l.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 8, 6, 8));
+                return l;
+            }
+        });
+    }
 }

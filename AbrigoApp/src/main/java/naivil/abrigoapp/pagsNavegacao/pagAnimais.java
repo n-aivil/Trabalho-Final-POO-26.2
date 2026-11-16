@@ -4,6 +4,11 @@
  */
 package naivil.abrigoapp.pagsNavegacao;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import naivil.abrigoapp.Animais.Animais;
 import naivil.abrigoapp.pagsUsuario.pagAdmin;
 
 /**
@@ -17,8 +22,30 @@ public class pagAnimais extends javax.swing.JFrame {
     /**
      * Creates new form pagAnimais
      */
+    
+    private final DefaultTableModel modeloTabela;
+    
     public pagAnimais() {
         initComponents();
+        
+        modeloTabela = new DefaultTableModel(new String[]{"ID", "Nome", "Espécie", "Raça", "Idade", "Porte", "Saúde", "Status"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int col){
+                return false;
+            }
+        };
+        tableAnimais.setModel(modeloTabela);
+        
+        boxFiltros.setModel(new DefaultComboBoxModel<>(new String[]{"Todos", "Não disponível", "Disponível", "Em processo", "Adotado"}));
+        
+        atualizarTabela();
+        
+        boxFiltros.addActionListener(e -> atualizarTabela());
+        fieldBuscar.getDocument().addDocumentListener(new DocumentListener(){
+            public void insertUpdate(DocumentEvent e)  { atualizarTabela(); }
+            public void removeUpdate(DocumentEvent e)  { atualizarTabela(); }
+            public void changedUpdate(DocumentEvent e) { atualizarTabela(); }
+        });
     }
 
     /**
@@ -33,6 +60,13 @@ public class pagAnimais extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonVoltar1 = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableAnimais = new javax.swing.JTable();
+        buttonCadastrarAnimal = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        fieldBuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        boxFiltros = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,22 +84,73 @@ public class pagAnimais extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Animais");
 
+        tableAnimais.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tableAnimais);
+
+        buttonCadastrarAnimal.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonCadastrarAnimal.setText("Cadastrar Animal");
+        buttonCadastrarAnimal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonCadastrarAnimal.addActionListener(this::buttonCadastrarAnimalActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel1.setText("Buscar:");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel2.setText("Filtros:");
+
+        boxFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(buttonVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(875, Short.MAX_VALUE))
-            .addComponent(labelTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(boxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonCadastrarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(labelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 623, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonCadastrarAnimal)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(boxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(buttonVoltar1)
                 .addGap(30, 30, 30))
         );
@@ -96,6 +181,11 @@ public class pagAnimais extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonVoltar1ActionPerformed
 
+    private void buttonCadastrarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarAnimalActionPerformed
+        new pagCadastrarAnimal(this).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_buttonCadastrarAnimalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -122,8 +212,30 @@ public class pagAnimais extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxFiltros;
+    private javax.swing.JButton buttonCadastrarAnimal;
     private javax.swing.JButton buttonVoltar1;
+    private javax.swing.JTextField fieldBuscar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JTable tableAnimais;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizarTabela() {
+        String busca = fieldBuscar.getText().trim().toLowerCase();
+        String filtro = (String) boxFiltros.getSelectedItem();
+        
+        modeloTabela.setRowCount(0);
+        for(Animais a : Animais.getTodosAnimais()) {
+            boolean statusOk = filtro == null || filtro.equals("Todos") || a.getStatusAdocao().equals(filtro);
+            boolean buscaOk = busca.isEmpty() || a.getNome().toLowerCase().contains(busca) || a.getEspecie().toLowerCase().contains(busca) || a.getRaca().toLowerCase().contains(busca);
+            
+            if(statusOk && buscaOk){
+                modeloTabela.addRow(new Object[]{a.getId(), a.getNome(), a.getEspecie(), a.getRaca(), a.getIdade(), a.getPorte(), a.getEstadoSaude(), a.getStatusAdocao()});
+            }
+        }
+    }
 }
