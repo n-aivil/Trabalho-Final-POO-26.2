@@ -88,6 +88,10 @@ public class Usuarios{
 	public String getSenha(){
 		return this.senha;
 	}
+        
+        public static ArrayList<Usuarios> getTodosUsuarios() {
+            return new ArrayList<>(todosUsuarios);
+        }
 
 	public static Voluntarios cadastrarVoluntario(String nome, int idade, String genero, String cpf, String email, String senha){
 		Voluntarios novoVoluntario = new Voluntarios(nome, idade, genero, cpf, email, senha);
@@ -112,4 +116,16 @@ public class Usuarios{
 		}
 		return null;
 	}
+        
+        public static boolean emailJaCadastrado(String email){
+            for(Usuarios u : todosUsuarios){
+                if(u.getEmail().equalsIgnoreCase(email)) return true;
+            } return false;
+        }
+        
+        public static boolean cpfJaCadastrado(String cpf){
+            for(Usuarios u : todosUsuarios){
+                if(u.getCpf().equals(cpf)) return true;
+            } return false;
+        }
 }

@@ -4,6 +4,7 @@
  */
 package naivil.abrigoapp.pagsUsuario;
 
+import naivil.abrigoapp.pagsInicial.PagInicial;
 import naivil.abrigoapp.pagsNavegacao.*;
 
 /**
@@ -38,7 +39,7 @@ public class pagAdmin extends javax.swing.JFrame {
         buttonUsuarios = new javax.swing.JButton();
         buttonRelatoriosEstatisticas = new javax.swing.JButton();
         buttonAtividades = new javax.swing.JButton();
-        buttonPerfil = new javax.swing.JButton();
+        buttonVoltar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,10 +77,15 @@ public class pagAdmin extends javax.swing.JFrame {
         buttonAtividades.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonAtividades.addActionListener(this::buttonAtividadesActionPerformed);
 
-        buttonPerfil.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        buttonPerfil.setText("Perfil");
-        buttonPerfil.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonPerfil.addActionListener(this::buttonPerfilActionPerformed);
+        buttonVoltar1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonVoltar1.setText("Voltar");
+        buttonVoltar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonVoltar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonVoltar1MouseClicked(evt);
+            }
+        });
+        buttonVoltar1.addActionListener(this::buttonVoltar1ActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,15 +93,19 @@ public class pagAdmin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonNotificacoes)
-                    .addComponent(buttonAnimais)
-                    .addComponent(buttonSolicitacoes)
-                    .addComponent(buttonUsuarios)
-                    .addComponent(buttonRelatoriosEstatisticas)
-                    .addComponent(buttonAtividades)
-                    .addComponent(buttonPerfil))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonNotificacoes)
+                            .addComponent(buttonAnimais)
+                            .addComponent(buttonSolicitacoes)
+                            .addComponent(buttonUsuarios)
+                            .addComponent(buttonRelatoriosEstatisticas)
+                            .addComponent(buttonAtividades)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(buttonVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,8 +116,6 @@ public class pagAdmin extends javax.swing.JFrame {
                 .addGap(110, 110, 110)
                 .addComponent(buttonNotificacoes)
                 .addGap(18, 18, 18)
-                .addComponent(buttonPerfil)
-                .addGap(18, 18, 18)
                 .addComponent(buttonAnimais)
                 .addGap(18, 18, 18)
                 .addComponent(buttonSolicitacoes)
@@ -117,7 +125,9 @@ public class pagAdmin extends javax.swing.JFrame {
                 .addComponent(buttonRelatoriosEstatisticas)
                 .addGap(18, 18, 18)
                 .addComponent(buttonAtividades)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addComponent(buttonVoltar1)
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,13 +192,17 @@ public class pagAdmin extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonAtividadesActionPerformed
 
-    private void buttonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPerfilActionPerformed
-        // ir pra pag perfil
+    private void buttonVoltar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltar1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonVoltar1MouseClicked
+
+    private void buttonVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltar1ActionPerformed
+        // voltar pra pag de cadastro
         this.dispose();
         java.awt.EventQueue.invokeLater(() -> {
-            new pagPerfil().setVisible(true);
+            new PagInicial().setVisible(true);
         });
-    }//GEN-LAST:event_buttonPerfilActionPerformed
+    }//GEN-LAST:event_buttonVoltar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,10 +233,10 @@ public class pagAdmin extends javax.swing.JFrame {
     private javax.swing.JButton buttonAnimais;
     private javax.swing.JButton buttonAtividades;
     private javax.swing.JButton buttonNotificacoes;
-    private javax.swing.JButton buttonPerfil;
     private javax.swing.JButton buttonRelatoriosEstatisticas;
     private javax.swing.JButton buttonSolicitacoes;
     private javax.swing.JButton buttonUsuarios;
+    private javax.swing.JButton buttonVoltar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables

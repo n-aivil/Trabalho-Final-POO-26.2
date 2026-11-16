@@ -4,6 +4,8 @@
  */
 package naivil.abrigoapp.pagsCadastro;
 
+import javax.swing.JOptionPane;
+import naivil.abrigoapp.Usuarios.Usuarios;
 import naivil.abrigoapp.pagsInicial.PagInicialCadastro;
 
 /**
@@ -17,8 +19,12 @@ public class CadastroVeterinario extends javax.swing.JFrame {
     /**
      * Creates new form CadastroVeterinario
      */
-    public CadastroVeterinario() {
+    
+    private final javax.swing.JFrame telaAnterior;
+    
+    public CadastroVeterinario(javax.swing.JFrame telaAnterior) {
         initComponents();
+        this.telaAnterior = telaAnterior;
     }
 
     /**
@@ -39,17 +45,17 @@ public class CadastroVeterinario extends javax.swing.JFrame {
         labelCpf = new javax.swing.JLabel();
         fieldCpf = new javax.swing.JTextField();
         labelGenero = new javax.swing.JLabel();
-        comboBoxGenero = new javax.swing.JComboBox<>();
+        boxGenero = new javax.swing.JComboBox<>();
         fieldEmail = new javax.swing.JTextField();
         labelEmail = new javax.swing.JLabel();
         labelSenha = new javax.swing.JLabel();
-        fieldEmail1 = new javax.swing.JTextField();
         labelSenha1 = new javax.swing.JLabel();
-        fieldEmail2 = new javax.swing.JTextField();
         buttonCadastro = new javax.swing.JButton();
         buttonVoltar = new javax.swing.JButton();
         labelCrmv = new javax.swing.JLabel();
         fieldCrmv = new javax.swing.JTextField();
+        fieldSenha = new javax.swing.JPasswordField();
+        fieldConfirmarSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,8 +81,8 @@ public class CadastroVeterinario extends javax.swing.JFrame {
         labelGenero.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         labelGenero.setText("Gênero:");
 
-        comboBoxGenero.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        comboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", "Outro" }));
+        boxGenero.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        boxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", "Outro" }));
 
         fieldEmail.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
@@ -86,12 +92,8 @@ public class CadastroVeterinario extends javax.swing.JFrame {
         labelSenha.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         labelSenha.setText("Senha:");
 
-        fieldEmail1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-
         labelSenha1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         labelSenha1.setText("Confirmar senha:");
-
-        fieldEmail2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         buttonCadastro.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         buttonCadastro.setText("Solicitar Cadastro");
@@ -118,57 +120,61 @@ public class CadastroVeterinario extends javax.swing.JFrame {
 
         fieldCrmv.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
+        fieldSenha.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        fieldSenha.setText("jPasswordField1");
+
+        fieldConfirmarSenha.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        fieldConfirmarSenha.setText("jPasswordField1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelSenha1)
-                        .addGap(18, 18, 18)
-                        .addComponent(fieldEmail2))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(labelNome)
-                            .addGap(18, 18, 18)
-                            .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(labelIdade)
-                            .addGap(18, 18, 18)
-                            .addComponent(fieldIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelCpf)
-                            .addGap(18, 18, 18)
-                            .addComponent(fieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(49, 49, 49)
-                            .addComponent(labelGenero)
-                            .addGap(31, 31, 31)
-                            .addComponent(comboBoxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(labelCrmv)
-                            .addGap(18, 18, 18)
-                            .addComponent(fieldCrmv, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelEmail)
-                            .addGap(18, 18, 18)
-                            .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(labelSenha)
-                            .addGap(18, 18, 18)
-                            .addComponent(fieldEmail1))))
-                .addContainerGap(92, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(377, 377, 377)
-                        .addComponent(buttonCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelSenha1)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldConfirmarSenha))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelNome)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelIdade)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelCpf)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(labelGenero)
+                                .addGap(31, 31, 31)
+                                .addComponent(boxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelCrmv)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldCrmv, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelEmail)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelSenha)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldSenha))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(buttonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(buttonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(375, 375, 375)
+                        .addComponent(buttonCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +190,7 @@ public class CadastroVeterinario extends javax.swing.JFrame {
                     .addComponent(labelIdade)
                     .addComponent(fieldIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelGenero)
-                    .addComponent(comboBoxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCpf)
                     .addComponent(fieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -198,14 +204,14 @@ public class CadastroVeterinario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelSenha)
-                    .addComponent(fieldEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelSenha1)
-                    .addComponent(fieldEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(fieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addComponent(buttonCadastro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(buttonVoltar)
                 .addGap(30, 30, 30))
         );
@@ -225,15 +231,48 @@ public class CadastroVeterinario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastroMouseClicked
-        // ir pra pag de cad de voluntario
-        this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new CadastroVoluntario().setVisible(true);
-        });
+
     }//GEN-LAST:event_buttonCadastroMouseClicked
 
     private void buttonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastroActionPerformed
-        // cadastrar provisioriamente o usuário e mandar a notificação de cadastro pro admin
+        String senha = new String(fieldSenha.getPassword());
+        String confirmar = new String(fieldConfirmarSenha.getPassword());
+        
+        if(!senha.equals(confirmar)){
+            JOptionPane.showMessageDialog(this, "As senhas não coincidem");
+            return;
+        }
+        
+        int idade = 0;
+        try {
+            idade = Integer.parseInt(fieldIdade.getText().trim());
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Idade inválida.");
+        }
+        
+        String nome = fieldNome.getText().trim();
+        String genero = (String) boxGenero.getSelectedItem();
+        String cpf = fieldCpf.getText().replaceAll("\\D", "");
+        String email = fieldEmail.getText().trim();
+        String crmv = fieldCrmv.getText().trim();
+        
+        if(Usuarios.cpfJaCadastrado(cpf)){
+            JOptionPane.showMessageDialog(this, "CPF já existente.");
+            return;
+        }
+        if(Usuarios.emailJaCadastrado(email)){
+            JOptionPane.showMessageDialog(this, "Email já existente.");
+            return;
+        }
+        
+        try {
+            Usuarios.cadastrarVeterinario(nome, idade, genero, cpf, email, senha, crmv);
+            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso.");
+            telaAnterior.setVisible(true);
+            this.dispose();
+        } catch (RuntimeException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Dados inválidos.", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_buttonCadastroActionPerformed
 
     private void buttonVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltarMouseClicked
@@ -248,42 +287,18 @@ public class CadastroVeterinario extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CadastroVeterinario().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxGenero;
     private javax.swing.JButton buttonCadastro;
     private javax.swing.JButton buttonVoltar;
-    private javax.swing.JComboBox<String> comboBoxGenero;
+    private javax.swing.JPasswordField fieldConfirmarSenha;
     private javax.swing.JTextField fieldCpf;
     private javax.swing.JTextField fieldCrmv;
     private javax.swing.JTextField fieldEmail;
-    private javax.swing.JTextField fieldEmail1;
-    private javax.swing.JTextField fieldEmail2;
     private javax.swing.JTextField fieldIdade;
     private javax.swing.JTextField fieldNome;
+    private javax.swing.JPasswordField fieldSenha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCpf;
     private javax.swing.JLabel labelCrmv;

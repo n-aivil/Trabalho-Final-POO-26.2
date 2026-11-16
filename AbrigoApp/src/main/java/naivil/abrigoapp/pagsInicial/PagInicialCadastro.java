@@ -35,7 +35,6 @@ public class PagInicialCadastro extends javax.swing.JFrame {
         labelVoltar = new javax.swing.JLabel();
         buttonPagInicial = new javax.swing.JButton();
         buttonVeterinario = new javax.swing.JButton();
-        buttonAdotante = new javax.swing.JButton();
         labelCadastro = new javax.swing.JLabel();
         buttonVoluntario = new javax.swing.JButton();
 
@@ -66,15 +65,6 @@ public class PagInicialCadastro extends javax.swing.JFrame {
             }
         });
 
-        buttonAdotante.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        buttonAdotante.setText("Adotante");
-        buttonAdotante.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonAdotante.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonAdotanteMouseClicked(evt);
-            }
-        });
-
         labelCadastro.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         labelCadastro.setText("Você deseja se cadastrar como");
 
@@ -99,7 +89,6 @@ public class PagInicialCadastro extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(buttonVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(buttonAdotante, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(buttonVoluntario, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(423, 423, 423))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -123,9 +112,7 @@ public class PagInicialCadastro extends javax.swing.JFrame {
                 .addComponent(buttonVoluntario)
                 .addGap(34, 34, 34)
                 .addComponent(buttonVeterinario)
-                .addGap(34, 34, 34)
-                .addComponent(buttonAdotante)
-                .addGap(130, 130, 130)
+                .addGap(201, 201, 201)
                 .addComponent(labelVoltar)
                 .addGap(18, 18, 18)
                 .addComponent(buttonPagInicial)
@@ -162,14 +149,6 @@ public class PagInicialCadastro extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonVeterinarioMouseClicked
 
-    private void buttonAdotanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAdotanteMouseClicked
-        // ir pra pag de cad de adotante
-        this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new CadastroAdotante().setVisible(true);
-        });
-    }//GEN-LAST:event_buttonAdotanteMouseClicked
-
     private void buttonVoluntarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoluntarioMouseClicked
         // ir pra pag de cad de voluntario
         this.dispose();
@@ -204,7 +183,6 @@ public class PagInicialCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAdotante;
     private javax.swing.JButton buttonPagInicial;
     private javax.swing.JButton buttonVeterinario;
     private javax.swing.JButton buttonVoluntario;

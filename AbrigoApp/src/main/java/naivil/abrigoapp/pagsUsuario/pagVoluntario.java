@@ -31,9 +31,9 @@ public class pagVoluntario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonAnimais = new javax.swing.JButton();
         buttonAtividades = new javax.swing.JButton();
-        buttonPerfil = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
         buttonNotificacoes = new javax.swing.JButton();
+        buttonSolicitacoes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,11 +47,6 @@ public class pagVoluntario extends javax.swing.JFrame {
         buttonAtividades.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonAtividades.addActionListener(this::buttonAtividadesActionPerformed);
 
-        buttonPerfil.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        buttonPerfil.setText("Perfil");
-        buttonPerfil.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonPerfil.addActionListener(this::buttonPerfilActionPerformed);
-
         labelTitulo.setFont(new java.awt.Font("sansserif", 1, 48)); // NOI18N
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Voluntário");
@@ -61,6 +56,11 @@ public class pagVoluntario extends javax.swing.JFrame {
         buttonNotificacoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonNotificacoes.addActionListener(this::buttonNotificacoesActionPerformed);
 
+        buttonSolicitacoes.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        buttonSolicitacoes.setText("Solicitações");
+        buttonSolicitacoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonSolicitacoes.addActionListener(this::buttonSolicitacoesActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -69,10 +69,10 @@ public class pagVoluntario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonSolicitacoes)
                     .addComponent(buttonAtividades)
                     .addComponent(buttonNotificacoes)
-                    .addComponent(buttonAnimais)
-                    .addComponent(buttonPerfil))
+                    .addComponent(buttonAnimais))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -83,7 +83,7 @@ public class pagVoluntario extends javax.swing.JFrame {
                 .addGap(110, 110, 110)
                 .addComponent(buttonNotificacoes)
                 .addGap(18, 18, 18)
-                .addComponent(buttonPerfil)
+                .addComponent(buttonSolicitacoes)
                 .addGap(18, 18, 18)
                 .addComponent(buttonAnimais)
                 .addGap(18, 18, 18)
@@ -113,13 +113,17 @@ public class pagVoluntario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonAtividadesActionPerformed
 
-    private void buttonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPerfilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonPerfilActionPerformed
-
     private void buttonNotificacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNotificacoesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonNotificacoesActionPerformed
+
+    private void buttonSolicitacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSolicitacoesActionPerformed
+        // ir pra pag de solicitações
+        this.dispose();
+        java.awt.EventQueue.invokeLater(() -> {
+            new pagSolicitacoes().setVisible(true);
+        });
+    }//GEN-LAST:event_buttonSolicitacoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +154,7 @@ public class pagVoluntario extends javax.swing.JFrame {
     private javax.swing.JButton buttonAnimais;
     private javax.swing.JButton buttonAtividades;
     private javax.swing.JButton buttonNotificacoes;
-    private javax.swing.JButton buttonPerfil;
+    private javax.swing.JButton buttonSolicitacoes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
