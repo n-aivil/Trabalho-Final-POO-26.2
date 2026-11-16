@@ -72,9 +72,9 @@ public class Administrador extends Usuarios {
         System.out.println(todosAnimais);
     }
     
-    public void aprovarAdocao(Animais animal, Adotantes adotante){
-        if(animal == null || adotante == null){
-            System.out.println("Erro: Animal ou adotante inválido.\n");
+    public void aprovarAdocao(Animais animal, Usuarios solicitante){
+        if(animal == null || solicitante == null){
+            System.out.println("Erro: Animal ou solicitante inválido.\n");
             return;
         }
         
@@ -84,19 +84,19 @@ public class Administrador extends Usuarios {
         }
         
         if(animal.getEstadoSaude().equalsIgnoreCase("Crítico")){
-            System.out.println("Animais em tratamento crítico não pode ser adotados.\n");
+            System.out.println("Animais em tratamento crítico não podem ser adotados.\n");
             return;
         }
         
         animal.setStatusAdocao("Adotado");
-        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Adotante: " + adotante.getNome() + " | Status: Aprovada";
+        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Adotante: " + solicitante.getNome() + " | Status: Aprovada";
         historicoAdocoes.add(registro);
-        System.out.println("Adoção aprovada com sucesso! " + animal.getNome() + "agora pertence a " + adotante.getNome() + ".\n");
+        System.out.println("Adoção aprovada com sucesso! " + animal.getNome() + " agora pertence a " + solicitante.getNome() + ".\n");
     }
     
-    public void rejeitarAdocao(Animais animal, Adotantes adotante, String motivo){
-        if(animal == null || adotante == null){
-            System.out.println("Erro: Animal ou adotante inválido. \n");
+    public void rejeitarAdocao(Animais animal, Usuarios solicitante, String motivo){
+        if(animal == null || solicitante == null){
+            System.out.println("Erro: Animal ou solicitante inválido.\n");
             return;
         }
         
@@ -104,20 +104,20 @@ public class Administrador extends Usuarios {
             animal.setStatusAdocao("Disponível");
         }
         
-        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Candidato: " + adotante.getNome() + " | Status: Rejeitada (" + motivo + ")";
+        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Candidato: " + solicitante.getNome() + " | Status: Rejeitada (" + motivo + ")";
         historicoAdocoes.add(registro);
         System.out.println("Solicitação de adoção rejeitada. Motivo: " + motivo + "\n");
     }
     
-    public void registrarDevolucao(Animais animal, Adotantes adotante, String motivo){
+    public void registrarDevolucao(Animais animal, Usuarios solicitante, String motivo){
         if(animal == null){
-            System.out.println("Animal inválido. \n");
+            System.out.println("Animal inválido.\n");
             return;
         }
         
         if(animal.getStatusAdocao().equalsIgnoreCase("Adotado")){
-            animal.setStatusAdocao("Dísponivel");
-            String registro = "DEVOLUÇÃO - Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Ex-adotante: " + (adotante != null ? adotante.getNome() : "Não informado") + " | Motivo: " + motivo;
+            animal.setStatusAdocao("Disponível");
+            String registro = "DEVOLUÇÃO - Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Ex-adotante: " + (solicitante != null ? solicitante.getNome() : "Não informado") + " | Motivo: " + motivo;
             historicoAdocoes.add(registro);
             
             System.out.println("Devolução registrada. O animal " + animal.getNome() + " está disponível novamente.\n");
@@ -137,5 +137,25 @@ public class Administrador extends Usuarios {
         }
     }
     
-    
+    public void removerUsuario(String cpf, List<Usuarios> todosUsuarios){
+        if(todosUsuarios == null || todosUsuarios.isEmpty()){
+            System.out.println("Lista de usuários vazia.\n");
+            return;
+        }
+        
+        for(int i = 0; i < todosUsuarios.size(); i++){
+            Usuarios u = todosUsuarios.get(i);
+            if(u.getCpf().equals(cpf)){
+                if(u instanceof Administrador){
+                    System.out.println("Não é permitido remover um Administrador do sistema\n");
+                    return;
+                }
+                todosUsuarios.remove(i);
+                System.out.println("Usuário removido com sucesso!\n");
+                return;
+            }
+        }
+        
+        System.out.println("Usuário com CPF " + cpf + " não encontrado.\n");
+    }
 }
