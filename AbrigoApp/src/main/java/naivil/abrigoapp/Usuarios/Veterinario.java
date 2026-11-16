@@ -48,4 +48,14 @@ public class Veterinario extends Usuarios {
             this.telefone = telefone;
         }
     }
+    
+    public void realizarAtendimento(String nomeAnimal, String diagnostico){
+        System.out.println("O veterinário " + getNome() + " realizou atendimento no animal " + nomeAnimal);
+        System.out.println("Diagnóstico: " + diagnostico);
+    }
+    
+    public void atualizarEstadoSaude(naivil.abrigoapp.Animais.Animais animal, String novoEstado) {
+        animal.setEstadoSaude(novoEstado);
+        System.out.println("O estado de saúde de " + animal.getNome() + " foi atualizado para: " + novoEstado);
+    }
 }

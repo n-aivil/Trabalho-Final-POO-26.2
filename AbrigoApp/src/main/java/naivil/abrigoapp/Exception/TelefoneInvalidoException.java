@@ -8,6 +8,8 @@ package naivil.abrigoapp.Exception;
  *
  * @author dvilltwn
  */
-public class TelefoneInvalidoException {
-    
+public class TelefoneInvalidoException extends RuntimeException{
+    public TelefoneInvalidoException(String mensagem){
+        super(mensagem);
+    }
 }

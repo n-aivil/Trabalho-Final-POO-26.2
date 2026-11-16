@@ -8,6 +8,8 @@ package naivil.abrigoapp.Exception;
  *
  * @author dvilltwn
  */
-public class EspecialidadeInvalidaException {
-    
+public class EspecialidadeInvalidaException extends RuntimeException {
+    public EspecialidadeInvalidaException(String mensagem){
+        super(mensagem);
+    }
 }
