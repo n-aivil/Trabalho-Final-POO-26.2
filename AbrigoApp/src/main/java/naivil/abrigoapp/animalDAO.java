@@ -6,8 +6,8 @@ package naivil.abrigoapp;
 
 /**
  *
- * @author dvilltwn
+ * @author vitoria
  */
-public class Conexao {
+class animalDAO {
     
 }

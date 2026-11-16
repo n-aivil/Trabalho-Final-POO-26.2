@@ -41,29 +41,6 @@ public class Administrador extends Usuarios {
         System.out.println("Animal com o ID " + id + " não foi encontrado.\n");
     }
 
-    public void removerAnimal(int id, List<Animais> todosAnimais) {
-        if (todosAnimais == null || todosAnimais.isEmpty()) {
-            System.out.println("Lista vazia.\n");
-            return;
-        }
-
-        for (int i = 0; i < todosAnimais.size(); i++) {
-            Animais a = todosAnimais.get(i);
-            if (a.getId() == id) {
-                if (a.getStatusAdocao().equals("Adotado")) {
-                    System.out.println("Esse animal já foi adotado, não é possível removê-lo.\n");
-                    return;
-                } else {
-                    animaisRemovidos.add(a);
-                    todosAnimais.remove(i);
-                    System.out.println("Animal removido com sucesso para o histórico.\n");
-                    return;
-                }
-            }
-        }
-        System.out.println("Animal com o ID " + id + " não foi encontrado.\n");
-    }
-
     public void exibirAnimaisRemovidos() {
         System.out.println(animaisRemovidos);
     }
