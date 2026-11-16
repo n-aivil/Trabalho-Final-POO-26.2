@@ -4,8 +4,8 @@ import java.util.regex.Pattern;
 import java.util.ArrayList;
 import naivil.abrigoapp.Exception.*;
 
-public abstract class Usuarios{
-    private static ArrayList<Usuarios> todosUsuarios = new ArrayList<>();
+public class Usuarios{
+    private static final ArrayList<Usuarios> todosUsuarios = new ArrayList<>();
 	private String nome;
 	private int idade;
 	private String genero;
