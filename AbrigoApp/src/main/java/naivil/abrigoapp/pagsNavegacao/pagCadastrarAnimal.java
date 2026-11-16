@@ -101,7 +101,7 @@ public class pagCadastrarAnimal extends javax.swing.JFrame {
         labelSaude.setText("Estado de Saúde:");
 
         boxSaude.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        boxSaude.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saudável", "Doente", "Lesionado" }));
+        boxSaude.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saudável", "Crítico" }));
 
         labelAdocao.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         labelAdocao.setText("Estado de Adoção:");

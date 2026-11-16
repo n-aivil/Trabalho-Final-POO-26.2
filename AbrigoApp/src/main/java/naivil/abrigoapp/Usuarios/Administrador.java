@@ -73,40 +73,32 @@ public class Administrador extends Usuarios {
     }
     
     public void aprovarAdocao(Animais animal, Usuarios solicitante){
-        if(animal == null || solicitante == null){
-            System.out.println("Erro: Animal ou solicitante inválido.\n");
-            return;
+        if (animal == null || solicitante == null) {
+            throw new IllegalArgumentException("Animal ou solicitante inválido.");
         }
-        
-        if(animal.getStatusAdocao().equalsIgnoreCase("Adotado")){
-            System.out.println("Esse animal já foi adotado!\n");
-            return;
+        if (animal.getStatusAdocao().equalsIgnoreCase("Adotado")) {
+            throw new IllegalStateException("Esse animal já foi adotado.");
         }
-        
-        if(animal.getEstadoSaude().equalsIgnoreCase("Crítico")){
-            System.out.println("Animais em tratamento crítico não podem ser adotados.\n");
-            return;
+        if (animal.getEstadoSaude().equalsIgnoreCase("Crítico")) {
+            throw new IllegalStateException("Animais em tratamento crítico não podem ser adotados.");
         }
-        
+
         animal.setStatusAdocao("Adotado");
-        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Adotante: " + solicitante.getNome() + " | Status: Aprovada";
+        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Adotante: "
+                + solicitante.getNome() + " | Status: Aprovada";
         historicoAdocoes.add(registro);
-        System.out.println("Adoção aprovada com sucesso! " + animal.getNome() + " agora pertence a " + solicitante.getNome() + ".\n");
     }
     
     public void rejeitarAdocao(Animais animal, Usuarios solicitante, String motivo){
-        if(animal == null || solicitante == null){
-            System.out.println("Erro: Animal ou solicitante inválido.\n");
-            return;
+        if (animal == null || solicitante == null) {
+            throw new IllegalArgumentException("Animal ou solicitante inválido.");
         }
-        
-        if(!animal.getStatusAdocao().equalsIgnoreCase("Adotado")){
+        if (!animal.getStatusAdocao().equalsIgnoreCase("Adotado")) {
             animal.setStatusAdocao("Disponível");
         }
-        
-        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Candidato: " + solicitante.getNome() + " | Status: Rejeitada (" + motivo + ")";
+        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Candidato: "
+                + solicitante.getNome() + " | Status: Rejeitada (" + motivo + ")";
         historicoAdocoes.add(registro);
-        System.out.println("Solicitação de adoção rejeitada. Motivo: " + motivo + "\n");
     }
     
     public void registrarDevolucao(Animais animal, Usuarios solicitante, String motivo){

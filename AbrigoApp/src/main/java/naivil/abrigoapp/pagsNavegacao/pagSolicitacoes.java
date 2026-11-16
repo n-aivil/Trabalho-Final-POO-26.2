@@ -5,10 +5,20 @@
 package naivil.abrigoapp.pagsNavegacao;
 
 import naivil.abrigoapp.pagsUsuario.pagAdmin;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import naivil.abrigoapp.Animais.Animais;
+import naivil.abrigoapp.Funcoes.Solicitacao;
+import naivil.abrigoapp.Usuarios.*;
 
 /**
  *
- * @author dvilltwn
+ * @author n-aivil
  */
 public class pagSolicitacoes extends javax.swing.JFrame {
     
@@ -17,8 +27,41 @@ public class pagSolicitacoes extends javax.swing.JFrame {
     /**
      * Creates new form pagSolicitacoes
      */
+    
+    private static final String MOTIVO_OUTRA_ADOCAO = "Animal adotado por outro candidato.";
+
+    private DefaultTableModel modeloTabela;
+    private ArrayList<Solicitacao> exibidas = new ArrayList<>();
+
     public pagSolicitacoes() {
         initComponents();
+        
+        modeloTabela = new DefaultTableModel(new String[]{"Data", "Animal", "Espécie", "Solicitante", "Status", "Motivo"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int col){
+                return false;
+            }
+        };
+        tableSolicitacoes.setModel(modeloTabela);
+        
+        boxFiltros.setModel(new DefaultComboBoxModel<>(new String[]{"Pendentes", "Aprovadas", "Rejeitadas", "Todas"}));
+        boxFiltros.addActionListener(e -> atualizarTabela());
+
+        tableSolicitacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) mostrarDetalhes();
+            }
+        });
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                atualizarTabela();
+            }
+        });
+
+        atualizarTabela();
     }
 
     /**
@@ -33,6 +76,14 @@ public class pagSolicitacoes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonVoltar1 = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableSolicitacoes = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        fieldBuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        boxFiltros = new javax.swing.JComboBox<>();
+        buttonRejeitar = new javax.swing.JButton();
+        buttonAprovar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,17 +101,53 @@ public class pagSolicitacoes extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Solicitações");
 
+        tableSolicitacoes.setModel(modeloTabela);
+        jScrollPane1.setViewportView(tableSolicitacoes);
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel1.setText("Buscar:");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel2.setText("Filtros:");
+
+        boxFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        buttonRejeitar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonRejeitar.setText("Rejeitar");
+        buttonRejeitar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonRejeitar.addActionListener(this::buttonRejeitarActionPerformed);
+
+        buttonAprovar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonAprovar.setText("Aprovar");
+        buttonAprovar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonAprovar.addActionListener(this::buttonAprovarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(buttonVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(875, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(buttonVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(boxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonAprovar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonRejeitar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -68,7 +155,17 @@ public class pagSolicitacoes extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(labelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 623, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(boxFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonRejeitar)
+                    .addComponent(buttonAprovar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(buttonVoltar1)
                 .addGap(30, 30, 30))
         );
@@ -99,6 +196,63 @@ public class pagSolicitacoes extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonVoltar1ActionPerformed
 
+    private void buttonAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAprovarActionPerformed
+        Solicitacao s = selecionadaPendente();
+        if (s == null) return;
+        Administrador admin = administradorLogado();
+        if (admin == null) return;
+
+        int resp = JOptionPane.showConfirmDialog(this,
+                "Aprovar a adoção de " + s.getAnimal().getNome()
+                + " por " + s.getSolicitante().getNome() + "?",
+                "Confirmar aprovação", JOptionPane.YES_NO_OPTION);
+        if (resp != JOptionPane.YES_OPTION) return;
+
+        try {
+            admin.aprovarAdocao(s.getAnimal(), s.getSolicitante());
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Não foi possível aprovar", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        s.aprovar();
+
+        for (Solicitacao outra : Solicitacao.pendentesDoAnimal(s.getAnimal())) {
+            admin.rejeitarAdocao(outra.getAnimal(), outra.getSolicitante(), MOTIVO_OUTRA_ADOCAO);
+            outra.rejeitar(MOTIVO_OUTRA_ADOCAO);
+        }
+
+        atualizarTabela();
+        JOptionPane.showMessageDialog(this, "Adoção aprovada!");
+    }//GEN-LAST:event_buttonAprovarActionPerformed
+
+    private void buttonRejeitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRejeitarActionPerformed
+        Solicitacao s = selecionadaPendente();
+        if (s == null) return;
+        Administrador admin = administradorLogado();
+        if (admin == null) return;
+
+        String motivo = JOptionPane.showInputDialog(this,
+                "Motivo da rejeição:", "Rejeitar solicitação", JOptionPane.QUESTION_MESSAGE);
+        if (motivo == null) return;
+        motivo = motivo.trim();
+        if (motivo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe o motivo da rejeição.");
+            return;
+        }
+
+        try {
+            admin.rejeitarAdocao(s.getAnimal(), s.getSolicitante(), motivo);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Não foi possível rejeitar", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        s.rejeitar(motivo);
+
+        atualizarTabela();
+    }//GEN-LAST:event_buttonRejeitarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -125,8 +279,91 @@ public class pagSolicitacoes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxFiltros;
+    private javax.swing.JButton buttonAprovar;
+    private javax.swing.JButton buttonRejeitar;
     private javax.swing.JButton buttonVoltar1;
+    private javax.swing.JTextField fieldBuscar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JTable tableSolicitacoes;
     // End of variables declaration//GEN-END:variables
+
+    private String statusDoFiltro() {
+        switch ((String) boxFiltros.getSelectedItem()) {
+            case "Pendentes":  return Solicitacao.PENDENTE;
+            case "Aprovadas":  return Solicitacao.APROVADA;
+            case "Rejeitadas": return Solicitacao.REJEITADA;
+            default:           return null; // todas
+        }
+    }
+    
+    public void atualizarTabela() {
+        String statusFiltro = statusDoFiltro();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        modeloTabela.setRowCount(0);
+        exibidas.clear();
+
+        for (Solicitacao s : Solicitacao.getTodas()) {
+            if (statusFiltro != null && !statusFiltro.equals(s.getStatus())) continue;
+
+            exibidas.add(s);
+            modeloTabela.addRow(new Object[]{
+                s.getData().format(fmt),
+                s.getAnimal().getNome(),
+                s.getAnimal().getEspecie(),
+                s.getSolicitante().getNome(),
+                s.getStatus(),
+                s.getMotivo() == null ? "-" : s.getMotivo()
+            });
+        }
+    }
+    
+    private Solicitacao selecionadaPendente() {
+        int linha = tableSolicitacoes.getSelectedRow();
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(this, "Selecione uma solicitação na tabela.");
+            return null;
+        }
+        Solicitacao s = exibidas.get(tableSolicitacoes.convertRowIndexToModel(linha));
+        if (!Solicitacao.PENDENTE.equals(s.getStatus())) {
+            JOptionPane.showMessageDialog(this,
+                    "Essa solicitação já foi " + s.getStatus().toLowerCase() + ".");
+            return null;
+        }
+        return s;
+    }
+
+    private Administrador administradorLogado() {
+        Usuarios u = Usuarios.getUsuarioLogado();
+        if (u instanceof Administrador) return (Administrador) u;
+        JOptionPane.showMessageDialog(this, "Apenas administradores podem decidir solicitações.");
+        return null;
+    }
+
+    private void mostrarDetalhes() {
+        int linha = tableSolicitacoes.getSelectedRow();
+        if (linha < 0) return;
+        Solicitacao s = exibidas.get(tableSolicitacoes.convertRowIndexToModel(linha));
+        Animais a = s.getAnimal();
+        Usuarios u = s.getSolicitante();
+
+        String texto = "ANIMAL\n"
+                + "Nome: " + a.getNome() + "\n"
+                + "Espécie: " + a.getEspecie() + " | Raça: " + a.getRaca() + "\n"
+                + "Idade: " + a.getIdade() + " | Porte: " + a.getPorte() + "\n"
+                + "Saúde: " + a.getEstadoSaude() + "\n"
+                + "Status: " + a.getStatusAdocao() + "\n\n"
+                + "SOLICITANTE\n"
+                + "Nome: " + u.getNome() + "\n"
+                + "E-mail: " + u.getEmail() + "\n"
+                + "Idade: " + u.getIdade();
+
+        JOptionPane.showMessageDialog(this, texto, "Detalhes da solicitação",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 }

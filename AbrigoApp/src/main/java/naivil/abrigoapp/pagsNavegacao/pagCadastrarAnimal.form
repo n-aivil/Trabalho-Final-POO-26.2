@@ -278,10 +278,9 @@
               <Font name="sansserif" size="18" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="Saud&#xe1;vel"/>
-                <StringItem index="1" value="Doente"/>
-                <StringItem index="2" value="Lesionado"/>
+                <StringItem index="1" value="Cr&#xed;tico"/>
               </StringArray>
             </Property>
           </Properties>
