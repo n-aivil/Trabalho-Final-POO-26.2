@@ -173,7 +173,7 @@ public class pagNotificacoes extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void iniciarAtualizacao() {
-        javax.Swing.Timer timer = new javax.Swing.Timer(5000, e -> {
+        javax.swing.Timer timer = new javax.swing.Timer(5000, e -> {
 
             new SwingWorker<java.util.List<Notificacao>, Void>() {
                 @Override

@@ -92,6 +92,10 @@ public class Usuarios{
         public static ArrayList<Usuarios> getTodosUsuarios() {
             return new ArrayList<>(todosUsuarios);
         }
+        
+        public static void removerUsuario(Usuarios u){
+            todosUsuarios.remove(u);
+        }
 
 	public static Voluntarios cadastrarVoluntario(String nome, int idade, String genero, String cpf, String email, String senha){
 		Voluntarios novoVoluntario = new Voluntarios(nome, idade, genero, cpf, email, senha);
@@ -103,14 +107,9 @@ public class Usuarios{
 		return novoVeterinario;
 	}
 
-	public static Adotantes cadastrarAdotantes(String nome, int idade, String genero, String cpf, String email, String senha){
-		Adotantes novoAdotante = new Adotantes(nome, idade, genero, cpf, email, senha);
-		return novoAdotante;
-	}
-
 	public static Usuarios autenticar(String emailDigitado, String senhaDigitada){
 	    for(Usuarios u : todosUsuarios){
-			if(u.getEmail().equals(emailDigitado) && u.getSenha().equals(senhaDigitada)){
+			if(u.getEmail().equalsIgnoreCase(emailDigitado) && u.getSenha().equals(senhaDigitada)){
 			    return u;
 			}
 		}
@@ -128,4 +127,50 @@ public class Usuarios{
                 if(u.getCpf().equals(cpf)) return true;
             } return false;
         }
+        
+        public void editar(String nome, int idade, String genero, String cpf, String email, String novaSenha){
+            String nomeAnt = this.nome;
+            String generoAnt = this.genero;
+            String cpfAnt = this.cpf;
+            String emailAnt = this.email;
+            String senhaAnt = this.senha;
+            int idadeAnt = this.idade;
+            
+            try{
+                setNome(nome);
+                setIdade(idade);
+                setGenero(genero);
+                setCpf(cpf);
+                setEmail(email);
+                if (novaSenha != null && !novaSenha.isEmpty()) {
+                    setSenha(novaSenha);
+                }
+            } catch (RuntimeException ex){
+                this.nome = nomeAnt;
+                this.idade = idadeAnt;
+                this.genero = generoAnt;
+                this.cpf = cpfAnt;
+                this.email = emailAnt;
+                this.senha = senhaAnt;
+                throw ex;
+            }
+        }
+        
+        public static boolean emailEmUsoPorOutro(String email, Usuarios atual){
+            for(Usuarios u : todosUsuarios){
+                if (u != atual && u.getEmail().equalsIgnoreCase(email)) return true;
+            } return false;
+        }
+        
+        public static boolean cpfEmUsoPorOutro(String cpf, Usuarios atual){
+            for(Usuarios u : todosUsuarios){
+                if (u != atual && u.getCpf().equalsIgnoreCase(cpf)) return true;
+            } return false;
+        }
+        
+        private static Usuarios usuarioLogado;
+        
+        public static Usuarios getUsuarioLogado() { return usuarioLogado; }
+        public static void setUsuarioLogado(Usuarios u) { usuarioLogado = u; }
+        public static void logout() { usuarioLogado = null; }
 }

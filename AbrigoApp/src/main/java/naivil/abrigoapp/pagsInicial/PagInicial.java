@@ -4,6 +4,10 @@
  */
 package naivil.abrigoapp.pagsInicial;
 
+import javax.swing.JOptionPane;
+import naivil.abrigoapp.Usuarios.*;
+import naivil.abrigoapp.pagsUsuario.*;
+
 /**
  *
  * @author n-aivil
@@ -17,6 +21,7 @@ public class PagInicial extends javax.swing.JFrame {
      */
     public PagInicial() {
         initComponents();
+        getRootPane().setDefaultButton(buttonLogin);
     }
 
     /**
@@ -52,11 +57,11 @@ public class PagInicial extends javax.swing.JFrame {
         labelSenha.setText("Senha:");
 
         fieldEmail.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-        fieldEmail.setText("exemplo@email.com");
+        fieldEmail.setToolTipText("exemplo@email.com");
         fieldEmail.setAlignmentX(0.0F);
 
         fieldSenha.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
-        fieldSenha.setText("jPasswordField1");
+        fieldSenha.setToolTipText("exemplodesenha");
         fieldSenha.setAlignmentX(0.0F);
 
         labelEmail1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
@@ -70,6 +75,7 @@ public class PagInicial extends javax.swing.JFrame {
                 buttonLoginMouseClicked(evt);
             }
         });
+        buttonLogin.addActionListener(this::buttonLoginActionPerformed);
 
         buttonCadastro.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         buttonCadastro.setText("Cadastre-se");
@@ -154,6 +160,26 @@ public class PagInicial extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonCadastroMouseClicked
 
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        String email = fieldEmail.getText().trim();
+        String senha = new String(fieldSenha.getPassword());
+        
+        if(email.isEmpty() || senha.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Informe o e-mail e a senha.");
+            return;
+        }
+        
+        Usuarios usuario = Usuarios.autenticar(email, senha);
+        if(usuario == null){
+            JOptionPane.showMessageDialog(this, "E-mail ou senha incorretos.", "Falha no Login.", JOptionPane.ERROR_MESSAGE);
+            fieldSenha.setText("");
+            return;
+        }
+        
+        Usuarios.setUsuarioLogado(usuario);
+        abriPaginaDoUsuario(usuario);
+    }//GEN-LAST:event_buttonLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,4 +217,19 @@ public class PagInicial extends javax.swing.JFrame {
     private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
+
+    private void abriPaginaDoUsuario(Usuarios usuario) {
+        javax.swing.JFrame proxima;
+        
+        if(usuario instanceof Veterinario){
+            proxima = new pagVeterinario();
+        } else if (usuario instanceof Voluntarios){
+            proxima = new pagVoluntario();
+        }else {
+            proxima = new pagAdmin();
+        }
+        
+        proxima.setVisible(true);
+        this.dispose();
+    }
 }

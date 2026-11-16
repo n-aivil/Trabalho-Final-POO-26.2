@@ -84,17 +84,7 @@ public class pagAnimais extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Animais");
 
-        tableAnimais.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tableAnimais.setModel(modeloTabela);
         jScrollPane1.setViewportView(tableAnimais);
 
         buttonCadastrarAnimal.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
@@ -224,7 +214,7 @@ public class pagAnimais extends javax.swing.JFrame {
     private javax.swing.JTable tableAnimais;
     // End of variables declaration//GEN-END:variables
 
-    private void atualizarTabela() {
+    void atualizarTabela() {
         String busca = fieldBuscar.getText().trim().toLowerCase();
         String filtro = (String) boxFiltros.getSelectedItem();
         

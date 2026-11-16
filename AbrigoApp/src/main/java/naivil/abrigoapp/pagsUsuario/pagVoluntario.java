@@ -4,6 +4,10 @@
  */
 package naivil.abrigoapp.pagsUsuario;
 
+import naivil.abrigoapp.Usuarios.Usuarios;
+import naivil.abrigoapp.pagsInicial.PagInicial;
+import naivil.abrigoapp.pagsNavegacao.pagSolicitacoes;
+
 /**
  *
  * @author dvilltwn
@@ -34,6 +38,7 @@ public class pagVoluntario extends javax.swing.JFrame {
         labelTitulo = new javax.swing.JLabel();
         buttonNotificacoes = new javax.swing.JButton();
         buttonSolicitacoes = new javax.swing.JButton();
+        buttonSair1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,18 +66,33 @@ public class pagVoluntario extends javax.swing.JFrame {
         buttonSolicitacoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonSolicitacoes.addActionListener(this::buttonSolicitacoesActionPerformed);
 
+        buttonSair1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonSair1.setText("Sair");
+        buttonSair1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonSair1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonSair1MouseClicked(evt);
+            }
+        });
+        buttonSair1.addActionListener(this::buttonSair1ActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonSolicitacoes)
-                    .addComponent(buttonAtividades)
-                    .addComponent(buttonNotificacoes)
-                    .addComponent(buttonAnimais))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonSolicitacoes)
+                            .addComponent(buttonAtividades)
+                            .addComponent(buttonNotificacoes)
+                            .addComponent(buttonAnimais)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(buttonSair1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -88,7 +108,9 @@ public class pagVoluntario extends javax.swing.JFrame {
                 .addComponent(buttonAnimais)
                 .addGap(18, 18, 18)
                 .addComponent(buttonAtividades)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
+                .addComponent(buttonSair1)
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,6 +147,16 @@ public class pagVoluntario extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonSolicitacoesActionPerformed
 
+    private void buttonSair1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSair1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonSair1MouseClicked
+
+    private void buttonSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSair1ActionPerformed
+        Usuarios.logout();
+        new PagInicial().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_buttonSair1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -154,6 +186,8 @@ public class pagVoluntario extends javax.swing.JFrame {
     private javax.swing.JButton buttonAnimais;
     private javax.swing.JButton buttonAtividades;
     private javax.swing.JButton buttonNotificacoes;
+    private javax.swing.JButton buttonSair;
+    private javax.swing.JButton buttonSair1;
     private javax.swing.JButton buttonSolicitacoes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;

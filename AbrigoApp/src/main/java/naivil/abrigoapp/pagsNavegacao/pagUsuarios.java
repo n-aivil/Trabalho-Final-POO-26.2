@@ -5,10 +5,16 @@
 package naivil.abrigoapp.pagsNavegacao;
 
 import naivil.abrigoapp.pagsUsuario.pagAdmin;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.*;
+import java.util.ArrayList;
+import naivil.abrigoapp.Usuarios.*;
 
 /**
  *
- * @author dvilltwn
+ * @author n-aivil
  */
 public class pagUsuarios extends javax.swing.JFrame {
     
@@ -17,9 +23,35 @@ public class pagUsuarios extends javax.swing.JFrame {
     /**
      * Creates new form pagUsuarios
      */
+    
+    private DefaultTableModel modeloTabela;
+    
     public pagUsuarios() {
         initComponents();
+        
+        modeloTabela = new DefaultTableModel(new String[]{"Nome", "Tipo", "Idade", "Gênero", "CPF", "E-mail"}, 0){
+            @Override
+            public boolean isCellEditable(int row, int col){ return false; }
+        };
+        tableUsuarios.setModel(modeloTabela);
+        
+        atualizarTabela();
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                atualizarTabela();
+            }
+        });
+        
+        tableUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) abrirEdicao();
+            }
+        });
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,8 +65,10 @@ public class pagUsuarios extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonVoltar1 = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
-        tableUsuarios = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableUsuarios = new javax.swing.JTable();
+        buttonRemover = new javax.swing.JButton();
+        buttonEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,18 +86,18 @@ public class pagUsuarios extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Usuários");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tableUsuarios.setViewportView(jTable1);
+        tableUsuarios.setModel(modeloTabela);
+        jScrollPane1.setViewportView(tableUsuarios);
+
+        buttonRemover.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonRemover.setText("Remover");
+        buttonRemover.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonRemover.addActionListener(this::buttonRemoverActionPerformed);
+
+        buttonEditar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonEditar.setText("Editar");
+        buttonEditar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonEditar.addActionListener(this::buttonEditarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,7 +114,12 @@ public class pagUsuarios extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tableUsuarios)))
+                        .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -88,8 +127,12 @@ public class pagUsuarios extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(labelTitulo)
-                .addGap(84, 84, 84)
-                .addComponent(tableUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonRemover)
+                    .addComponent(buttonEditar))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonVoltar1)
                 .addGap(30, 30, 30))
@@ -121,6 +164,26 @@ public class pagUsuarios extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_buttonVoltar1ActionPerformed
 
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+        abrirEdicao();
+    }//GEN-LAST:event_buttonEditarActionPerformed
+
+    private void buttonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoverActionPerformed
+        int linha = tableUsuarios.getSelectedRow();
+        if(linha < 0){
+            JOptionPane.showMessageDialog(this, "Selecione um usuário na tabela");
+            return;
+        }
+        
+        Usuarios u = usuariosExibidos.get(linha);
+        int resp = JOptionPane.showConfirmDialog(this, "Remover o usuário " + u.getNome() + "?\nEssa ação não pode ser desfeita.", "Confirmar remoção.", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        if(resp == JOptionPane.YES_OPTION){
+            Usuarios.removerUsuario(u);
+            atualizarTabela();
+        }
+    }//GEN-LAST:event_buttonRemoverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -147,10 +210,110 @@ public class pagUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonEditar;
+    private javax.swing.JButton buttonRemover;
     private javax.swing.JButton buttonVoltar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelTitulo;
-    private javax.swing.JScrollPane tableUsuarios;
+    private javax.swing.JTable tableUsuarios;
     // End of variables declaration//GEN-END:variables
+
+    private ArrayList<Usuarios> usuariosExibidos = new ArrayList<>();
+    
+    private void atualizarTabela() {
+        modeloTabela.setRowCount(0);
+        usuariosExibidos.clear();
+        for(Usuarios u : Usuarios.getTodosUsuarios()){
+            String tipo;
+            if(u instanceof Veterinario) tipo = "Veterinário";
+            else if (u instanceof Voluntarios) tipo = "Voluntário";
+            else tipo = "Outro";
+            
+            usuariosExibidos.add(u);
+            modeloTabela.addRow(new Object[]{u.getNome(), tipo, u.getIdade(), u.getGenero(), u.getCpf(), u.getEmail()});
+        }
+    }
+
+    private void abrirEdicao() {
+        int linha = tableUsuarios.getSelectedRow();
+        if(linha < 0){
+            JOptionPane.showMessageDialog(this, "Selecione um usuário na tabela.");
+            return;
+        }
+        editarUsuario(usuariosExibidos.get(linha));
+    }
+
+    private void editarUsuario(Usuarios u) {
+        JTextField fNome = new JTextField(u.getNome(), 20);
+        JTextField fIdade = new JTextField(String.valueOf(u.getIdade()));
+        JComboBox<String> fGenero = new JComboBox<>(new String[]{"Feminino", "Masculino", "Outro"});
+        fGenero.setSelectedItem(u.getGenero());
+        JTextField fCpf = new JTextField(u.getCpf());
+        JTextField fEmail = new JTextField(u.getEmail());
+        JPasswordField fSenha = new JPasswordField();
+
+        JPanel painel = new JPanel(new java.awt.GridLayout(0, 2, 6, 6));
+        painel.add(new JLabel("Nome:"));   painel.add(fNome);
+        painel.add(new JLabel("Idade:"));  painel.add(fIdade);
+        painel.add(new JLabel("Gênero:")); painel.add(fGenero);
+        painel.add(new JLabel("CPF:"));    painel.add(fCpf);
+        painel.add(new JLabel("E-mail:")); painel.add(fEmail);
+
+        JTextField fCrmv = null;
+        if (u instanceof Veterinario) {
+            fCrmv = new JTextField(((Veterinario) u).getCrmv());
+            painel.add(new JLabel("CRMV:")); painel.add(fCrmv);
+        }
+
+        painel.add(new JLabel("Nova senha:"));
+        painel.add(fSenha);
+        painel.add(new JLabel(""));
+        painel.add(new JLabel("<html><small>Deixe em branco para manter a atual</small></html>"));
+
+        while (true) {
+            int op = JOptionPane.showConfirmDialog(this, painel, "Editar usuário",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (op != JOptionPane.OK_OPTION) return;
+
+            String cpf = fCpf.getText().replaceAll("\\D", "");
+            String email = fEmail.getText().trim();
+            String crmvAnterior = null;
+            boolean crmvAlterado = false;
+
+            try {
+                int idade = Integer.parseInt(fIdade.getText().trim());
+
+                if (Usuarios.cpfEmUsoPorOutro(cpf, u)) {
+                    throw new IllegalArgumentException("CPF já existente.");
+                }
+                if (Usuarios.emailEmUsoPorOutro(email, u)) {
+                    throw new IllegalArgumentException("Email já existente.");
+                }
+
+                if (u instanceof Veterinario) {
+                    Veterinario v = (Veterinario) u;
+                    crmvAnterior = v.getCrmv();
+                    v.setCrmv(fCrmv.getText().trim());
+                    crmvAlterado = true;
+                }
+
+                u.editar(fNome.getText().trim(), idade, (String) fGenero.getSelectedItem(),
+                        cpf, email, new String(fSenha.getPassword()));
+
+                atualizarTabela();
+                JOptionPane.showMessageDialog(this, "Usuário atualizado.");
+                return;
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Idade inválida.");
+            } catch (RuntimeException ex) {
+                if (crmvAlterado) {
+                    ((Veterinario) u).setCrmv(crmvAnterior);
+                }
+                JOptionPane.showMessageDialog(this, ex.getMessage(),
+                        "Dados inválidos", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
 }

@@ -4,6 +4,7 @@
  */
 package naivil.abrigoapp.pagsUsuario;
 
+import naivil.abrigoapp.Usuarios.Usuarios;
 import naivil.abrigoapp.pagsInicial.PagInicial;
 
 /**
@@ -34,7 +35,7 @@ public class pagVeterinario extends javax.swing.JFrame {
         buttonAnimais = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
         buttonNotificacoes = new javax.swing.JButton();
-        buttonVoltar1 = new javax.swing.JButton();
+        buttonSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,15 +53,15 @@ public class pagVeterinario extends javax.swing.JFrame {
         buttonNotificacoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonNotificacoes.addActionListener(this::buttonNotificacoesActionPerformed);
 
-        buttonVoltar1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        buttonVoltar1.setText("Voltar");
-        buttonVoltar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonVoltar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonSair.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        buttonSair.setText("Sair");
+        buttonSair.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonVoltar1MouseClicked(evt);
+                buttonSairMouseClicked(evt);
             }
         });
-        buttonVoltar1.addActionListener(this::buttonVoltar1ActionPerformed);
+        buttonSair.addActionListener(this::buttonSairActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,7 +77,7 @@ public class pagVeterinario extends javax.swing.JFrame {
                             .addComponent(buttonAnimais)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(buttonVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -88,8 +89,8 @@ public class pagVeterinario extends javax.swing.JFrame {
                 .addComponent(buttonNotificacoes)
                 .addGap(18, 18, 18)
                 .addComponent(buttonAnimais)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 421, Short.MAX_VALUE)
-                .addComponent(buttonVoltar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 414, Short.MAX_VALUE)
+                .addComponent(buttonSair)
                 .addGap(30, 30, 30))
         );
 
@@ -115,17 +116,15 @@ public class pagVeterinario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonNotificacoesActionPerformed
 
-    private void buttonVoltar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltar1MouseClicked
+    private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonVoltar1MouseClicked
+    }//GEN-LAST:event_buttonSairMouseClicked
 
-    private void buttonVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVoltar1ActionPerformed
-        // voltar pra pag de cadastro
+    private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
+        Usuarios.logout();
+        new PagInicial().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new PagInicial().setVisible(true);
-        });
-    }//GEN-LAST:event_buttonVoltar1ActionPerformed
+    }//GEN-LAST:event_buttonSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +154,7 @@ public class pagVeterinario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAnimais;
     private javax.swing.JButton buttonNotificacoes;
-    private javax.swing.JButton buttonVoltar1;
+    private javax.swing.JButton buttonSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
