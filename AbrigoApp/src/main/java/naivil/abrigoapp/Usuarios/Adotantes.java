@@ -1,12 +1,11 @@
 package naivil.abrigoapp.Usuarios;
-import java.util.List;
 import naivil.abrigoapp.Animais.Animais;
 import naivil.abrigoapp.Exception.*;
 
 public class Adotantes extends Usuarios{
 
     private Iterable<Animais> todosAnimais;
-    private List<Animais> animaisSolicitados = new ArrayList<>();
+    private final ArrayList animaisSolicitados = new ArrayList();
 	public Adotantes(String nome, int idade, String genero, String cpf, String email, String senha) throws NomeInvalidoException, IdadeInvalidaException, GeneroInvalidoException, CpfInvalidoException, EmailInvalidoException, SenhaInvalidaException{
 		super(nome, idade, genero, cpf, email, senha);
 	}
@@ -36,11 +35,8 @@ public class Adotantes extends Usuarios{
 		}
 	}
         
-        public List<Animais> getAnimaisSolicitados() {
+        public ArrayList getAnimaisSolicitados() {
             return animaisSolicitados;
         }
 
-	public void consultarStatusAdocao(){
-
-	}
 }

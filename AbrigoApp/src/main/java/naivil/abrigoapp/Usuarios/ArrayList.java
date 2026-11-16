@@ -4,6 +4,8 @@
  */
 package naivil.abrigoapp.Usuarios;
 
+import naivil.abrigoapp.Animais.Animais;
+
 /**
  *
  * @author vitoria
@@ -11,6 +13,10 @@ package naivil.abrigoapp.Usuarios;
 public class ArrayList {
 
     public ArrayList() {
+    }
+
+    void add(Animais a) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

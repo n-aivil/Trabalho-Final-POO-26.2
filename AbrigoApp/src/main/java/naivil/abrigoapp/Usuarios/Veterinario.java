@@ -8,7 +8,7 @@ public class Veterinario extends Usuarios{
 		setCrmv(crmv);
 	}
 
-	public void setCrmv(String crmv) throws CrmvInvalidoException{
+	public void setCrmv(String crmv){
 	    if(crmv == null || crmv.isEmpty()){
 			throw new CrmvInvalidoException("O CRMV não pode ser vazio.");
 			}
