@@ -225,8 +225,11 @@ public class PagInicial extends javax.swing.JFrame {
             proxima = new pagVeterinario();
         } else if (usuario instanceof Voluntarios){
             proxima = new pagVoluntario();
-        }else {
+        }else if (usuario.getEmail().equalsIgnoreCase("adminabrigo@entrepatas.com") || usuario.getSenha().equals("costelinha161126")){
             proxima = new pagAdmin();
+        } else {
+            JOptionPane.showMessageDialog(this, "Login inválido");
+            return;
         }
         
         proxima.setVisible(true);

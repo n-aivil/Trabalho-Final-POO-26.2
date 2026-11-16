@@ -48,7 +48,7 @@ public class pagRelatoriosEstatisticas extends javax.swing.JFrame {
 
         labelTitulo.setFont(new java.awt.Font("sansserif", 1, 48)); // NOI18N
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTitulo.setText("Relatórios");
+        labelTitulo.setText("Relatórios e Estatísticas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

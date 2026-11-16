@@ -86,7 +86,7 @@
               <Font name="sansserif" size="48" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
+            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios e Estat&#xed;sticas"/>
           </Properties>
         </Component>
       </SubComponents>
