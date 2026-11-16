@@ -1,11 +1,14 @@
 package naivil.abrigoapp.Usuarios;
 import naivil.abrigoapp.Exception.*;
-public class Veterinario extends Usuarios{
-	private String crmv;
 
+public class Veterinario extends Usuarios{
+    
+	private String crmv;
+        protected String tipo;
 	public Veterinario(String nome, int idade, String genero, String cpf, String email, String senha, String crmv){
 		super(nome, idade, genero, cpf, email, senha);
 		setCrmv(crmv);
+                this.tipo = "Veterinario";
 	}
 
 	public void setCrmv(String crmv){

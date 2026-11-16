@@ -34,7 +34,7 @@ public class Animais{
         public List<Animais> getTodosAnimais() {
             return todosAnimais;
         }
-
+        
         public List<Animais> getAnimaisRemovidos() {
             return animaisRemovidos;
         }

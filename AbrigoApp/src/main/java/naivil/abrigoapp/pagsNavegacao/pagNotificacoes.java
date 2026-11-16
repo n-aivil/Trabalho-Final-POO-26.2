@@ -4,12 +4,13 @@
  */
 package naivil.abrigoapp.pagsNavegacao;
 
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.SwingWorker;
-import javax.swing.Timer;
+import naivil.abrigoapp.Funcoes.Notificacao;
 import naivil.abrigoapp.pagsUsuario.*;
 
 /**
@@ -23,7 +24,7 @@ public class pagNotificacoes extends javax.swing.JFrame {
     /**
      * Creates new form pagNotificacoes
      */
-    private DefaultListModel<Notificacao> modelo = new DefaultListModel<>();
+    private final DefaultListModel<Notificacao> modelo = new DefaultListModel<>();
 
     public pagNotificacoes() {
         initComponents();
@@ -36,7 +37,7 @@ public class pagNotificacoes extends javax.swing.JFrame {
         listaNotificacoes.setCellRenderer(new DefaultListCellRenderer(){
             @Override
             public java.awt.Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                Jlabel l = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                JLabel l = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 Notificacao n = (Notificacao) value;
                 String hora = n.getHora().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
                 l.setText("<html><b>" + n.getTitulo() + "</b> <small>(" + hora + ")</small><br>" + n.getMensagem() + "</html>");
@@ -77,11 +78,7 @@ public class pagNotificacoes extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("Notificações");
 
-        listaNotificacoes.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listaNotificacoes.setModel(new DefaultListModel<Notificacao>());
         jScrollPane1.setViewportView(listaNotificacoes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -172,7 +169,7 @@ public class pagNotificacoes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelTitulo;
-    private javax.swing.JList<String> listaNotificacoes;
+    private javax.swing.JList<Notificacao> listaNotificacoes;
     // End of variables declaration//GEN-END:variables
 
     private void iniciarAtualizacao() {
