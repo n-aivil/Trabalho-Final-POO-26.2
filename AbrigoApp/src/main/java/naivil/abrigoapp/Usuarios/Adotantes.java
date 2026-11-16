@@ -38,5 +38,4 @@ public class Adotantes extends Usuarios{
         public ArrayList getAnimaisSolicitados() {
             return animaisSolicitados;
         }
-
 }
