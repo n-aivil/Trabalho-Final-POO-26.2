@@ -6,14 +6,17 @@ import naivil.abrigoapp.Animais.Animais;
 
 public class Administrador extends Usuarios {
     private List<Animais> animaisRemovidos = new ArrayList<>();
-
-    // Construtor corrigido com os dados do usuário (e-mail e senha fixos ou passados por parâmetro)
+    private String tipo;
     public Administrador(String nome, int idade, String genero, String cpf, String email, String senha) throws Exception {
-        super(nome, idade, genero, cpf, email, senha);
+        super(nome, idade, genero, cpf, "adminabrigo@entrepatas.com", "costelinha161126");
+        this.tipo = "Admnistrador";
     }
 
-    public Animais cadastrarAnimaisRegastados(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao) {
+    public Animais cadastrarAnimaisRegastados(String nome, String especie, String raca, int idade, String porte, String estadoSaude, String dataResgate, String statusAdocao, List<Animais> todosAnimais) {
         Animais novoAnimal = new Animais(nome, especie, raca, idade, porte, estadoSaude, dataResgate, statusAdocao);
+        if(todosAnimais != null){
+          todosAnimais.add(novoAnimal);
+        }
         System.out.println("Animal cadastrado com sucesso! Id gerado: " + novoAnimal.getId() + "\n");
         return novoAnimal;
     }
