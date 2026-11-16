@@ -6,7 +6,9 @@ import naivil.abrigoapp.Animais.Animais;
 
 public class Administrador extends Usuarios {
     private List<Animais> animaisRemovidos = new ArrayList<>();
+    private List<String> historicoAdocoes = new ArrayList<>();
     private String tipo;
+    
     public Administrador(String nome, int idade, String genero, String cpf, String email, String senha) throws Exception {
         super(nome, idade, genero, cpf, "adminabrigo@entrepatas.com", "costelinha161126");
         this.tipo = "Admnistrador";
@@ -69,4 +71,71 @@ public class Administrador extends Usuarios {
     public void exibirTodosAnimais(List<Animais> todosAnimais) {
         System.out.println(todosAnimais);
     }
+    
+    public void aprovarAdocao(Animais animal, Adotantes adotante){
+        if(animal == null || adotante == null){
+            System.out.println("Erro: Animal ou adotante inválido.\n");
+            return;
+        }
+        
+        if(animal.getStatusAdocao().equalsIgnoreCase("Adotado")){
+            System.out.println("Esse animal já foi adotado!\n");
+            return;
+        }
+        
+        if(animal.getEstadoSaude().equalsIgnoreCase("Crítico")){
+            System.out.println("Animais em tratamento crítico não pode ser adotados.\n");
+            return;
+        }
+        
+        animal.setStatusAdocao("Adotado");
+        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Adotante: " + adotante.getNome() + " | Status: Aprovada";
+        historicoAdocoes.add(registro);
+        System.out.println("Adoção aprovada com sucesso! " + animal.getNome() + "agora pertence a " + adotante.getNome() + ".\n");
+    }
+    
+    public void rejeitarAdocao(Animais animal, Adotantes adotante, String motivo){
+        if(animal == null || adotante == null){
+            System.out.println("Erro: Animal ou adotante inválido. \n");
+            return;
+        }
+        
+        if(!animal.getStatusAdocao().equalsIgnoreCase("Adotado")){
+            animal.setStatusAdocao("Disponível");
+        }
+        
+        String registro = "Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Candidato: " + adotante.getNome() + " | Status: Rejeitada (" + motivo + ")";
+        historicoAdocoes.add(registro);
+        System.out.println("Solicitação de adoção rejeitada. Motivo: " + motivo + "\n");
+    }
+    
+    public void registrarDevolucao(Animais animal, Adotantes adotante, String motivo){
+        if(animal == null){
+            System.out.println("Animal inválido. \n");
+            return;
+        }
+        
+        if(animal.getStatusAdocao().equalsIgnoreCase("Adotado")){
+            animal.setStatusAdocao("Dísponivel");
+            String registro = "DEVOLUÇÃO - Animal: " + animal.getNome() + " (ID: " + animal.getId() + ") | Ex-adotante: " + (adotante != null ? adotante.getNome() : "Não informado") + " | Motivo: " + motivo;
+            historicoAdocoes.add(registro);
+            
+            System.out.println("Devolução registrada. O animal " + animal.getNome() + " está disponível novamente.\n");
+        }else{
+            System.out.println("Este animal não consta como adotado no sistema.\n");
+        }
+    }
+    
+    public void exibirHistoricoAdocoes(){
+        if(historicoAdocoes.isEmpty()){
+            System.out.println("Nenhuma movimentação de adoção registrada até o momento.\n");
+            return;
+        }
+        
+        for(String h : historicoAdocoes){
+            System.out.println(h);
+        }
+    }
+    
+    
 }
