@@ -131,11 +131,8 @@ public class pagAtividades extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCriarAtividadeMouseClicked
 
     private void buttonCriarAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCriarAtividadeActionPerformed
-
+        new pagCriarAtividade().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new pagCriarAtividade().setVisible(true);
-        });
     }//GEN-LAST:event_buttonCriarAtividadeActionPerformed
 
     private void buttonVoltar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltar2MouseClicked

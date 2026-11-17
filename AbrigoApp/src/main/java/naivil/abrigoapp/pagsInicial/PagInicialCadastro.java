@@ -143,18 +143,14 @@ public class PagInicialCadastro extends javax.swing.JFrame {
 
     private void buttonVeterinarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVeterinarioMouseClicked
         // ir pra pag de cad de veterinario
+        new CadastroVoluntario().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new CadastroVeterinario().setVisible(true);
-        });
     }//GEN-LAST:event_buttonVeterinarioMouseClicked
 
     private void buttonVoluntarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoluntarioMouseClicked
         // ir pra pag de cad de voluntario
+        new CadastroVoluntario().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new CadastroVoluntario().setVisible(true);
-        });
     }//GEN-LAST:event_buttonVoluntarioMouseClicked
 
     /**

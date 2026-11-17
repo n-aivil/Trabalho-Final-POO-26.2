@@ -169,6 +169,12 @@ public class PagInicial extends javax.swing.JFrame {
             return;
         }
         
+        if (email.equalsIgnoreCase("adminabrigo@entrepatas.com") && senha.equals("costelinha161126")) {
+            new pagAdmin().setVisible(true);
+            this.dispose();
+            return;
+        }
+        
         Usuarios usuario = Usuarios.autenticar(email, senha);
         if(usuario == null){
             JOptionPane.showMessageDialog(this, "E-mail ou senha incorretos.", "Falha no Login.", JOptionPane.ERROR_MESSAGE);
@@ -225,8 +231,6 @@ public class PagInicial extends javax.swing.JFrame {
             proxima = new pagVeterinario();
         } else if (usuario instanceof Voluntarios){
             proxima = new pagVoluntario();
-        }else if (usuario.getEmail().equalsIgnoreCase("adminabrigo@entrepatas.com") || usuario.getSenha().equals("costelinha161126")){
-            proxima = new pagAdmin();
         } else {
             JOptionPane.showMessageDialog(this, "Login inválido");
             return;

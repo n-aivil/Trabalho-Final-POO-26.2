@@ -147,50 +147,38 @@ public class pagAdmin extends javax.swing.JFrame {
 
     private void buttonNotificacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNotificacoesActionPerformed
         // ir pra pag de notif
+        new pagNotificacoes().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new pagNotificacoes().setVisible(true);
-        });
     }//GEN-LAST:event_buttonNotificacoesActionPerformed
 
     private void buttonAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAnimaisActionPerformed
         // ir pra pag de animais
+        new pagAnimais().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new pagAnimais().setVisible(true);
-        });
     }//GEN-LAST:event_buttonAnimaisActionPerformed
 
     private void buttonSolicitacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSolicitacoesActionPerformed
         // ir pra pag de solicitações
+        new pagSolicitacoes().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new pagSolicitacoes().setVisible(true);
-        });
     }//GEN-LAST:event_buttonSolicitacoesActionPerformed
 
     private void buttonUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUsuariosActionPerformed
         // ir pra pag de usuarios
+        new pagUsuarios().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new pagUsuarios().setVisible(true);
-        });
     }//GEN-LAST:event_buttonUsuariosActionPerformed
 
     private void buttonRelatoriosEstatisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRelatoriosEstatisticasActionPerformed
         // ir pra pag de relatorios e estatisticas
+        new pagRelatoriosEstatisticas().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new pagRelatoriosEstatisticas().setVisible(true);
-        });
     }//GEN-LAST:event_buttonRelatoriosEstatisticasActionPerformed
 
     private void buttonAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtividadesActionPerformed
         // ir pra pag atividades
+        new pagAtividades().setVisible(true);
         this.dispose();
-        java.awt.EventQueue.invokeLater(() -> {
-            new pagAtividades().setVisible(true);
-        });
     }//GEN-LAST:event_buttonAtividadesActionPerformed
 
     private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseClicked

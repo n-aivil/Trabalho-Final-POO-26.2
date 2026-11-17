@@ -6,6 +6,7 @@ package naivil.abrigoapp.pagsNavegacao;
 
 import javax.swing.JOptionPane;
 import naivil.abrigoapp.Animais.Animais;
+import naivil.abrigoapp.Database.AnimalDAO;
 
 /**
  *
@@ -260,7 +261,9 @@ public class pagCadastrarAnimal extends javax.swing.JFrame {
         
         String dataResgate = fieldData.getText().trim();
         
-        new Animais(nome, (String) boxEspecie.getSelectedItem(), raca, idade, (String) boxPorte.getSelectedItem(), (String) boxSaude.getSelectedItem(), dataResgate, (String) boxAdocao.getSelectedItem());
+        Animais novoAnimal = new Animais(nome, (String) boxEspecie.getSelectedItem(), raca, idade, (String) boxPorte.getSelectedItem(), (String) boxSaude.getSelectedItem(), dataResgate, (String) boxAdocao.getSelectedItem());
+        AnimalDAO dao = new AnimalDAO();
+        dao.inserir(novoAnimal);
         
         JOptionPane.showMessageDialog(this, "Animal cadastrado.");
         telaAnimais.atualizarTabela();
